@@ -8,12 +8,21 @@ function respond() {
   var request = JSON.parse(this.req.chunks[0]),
       sOTD = /^\/scum of the day$/;
       beer = /^\/beer$/;
+
   this.res.writeHead(200);
+
   if(request.text && sOTD.test(request.text)) {
   postMessage("Text: " + JSON.stringify(request) + "\nName: " + request.name);
-  } else if(beer.test(request.text)) {
-    postMessage("You guys should be drinking " + beers[Math.floor(Math.random()*beers.length)] + "tonight");
   }
+
+  if(beer.test(request.text)) {
+    postMessage("You guys should be drinking " + beers[Math.floor(Math.random()*beers.length)] + " tonight");
+  }
+
+  if(request.text.includes("bored")) {
+    postMessage("Anyone want to play soccer in an hour?");
+  }
+
   this.res.end();
 }
 
