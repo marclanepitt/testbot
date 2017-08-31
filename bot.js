@@ -11,6 +11,7 @@ function respond() {
       sOTD = /^\/scum of the day$/;
       beer = /^\/beer$/;
       dinner = /^\/dinner$/;
+      dadJoke = /^\/dad$/;
 
   this.res.writeHead(200);
 
@@ -22,6 +23,14 @@ function respond() {
     postMessage("Want to play soccer in an hour?")
   } else if(dinner.test(request.text)) {
     postMessage("Let's get " + restaurants[Math.floor(Math.random()*restaurants.length)] + " tonight");
+  } else if(dadJoke.test(request.text)) {
+    fetch('https://davidwalsh.name/some/url', {
+      method: 'get'
+    }).then(function(response) {
+      postMessage(response.joke);
+    }).catch(function(err) {
+      // Error :(
+    });
   }
 
   this.res.end();
