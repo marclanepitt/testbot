@@ -25,7 +25,9 @@ function respond() {
   } else if(dinner.test(request.text)) {
     postMessage("Let's get " + restaurants[Math.floor(Math.random()*restaurants.length)] + " tonight");
   } else if(dadJoke.test(request.text)) {
-
+    axios.get('https://icanhazdadjoke.com/').then(response => {
+      postMessage(JSON.stringify(response));
+    });
   }
 
   this.res.end();
