@@ -4,10 +4,13 @@ var botID = process.env.BOT_ID;
 
 var beers = ['Bud Light', 'Platinums', "Bud Heavy", "Blue Moon","Nattys","Corona","Miller","Coors"];
 
+var restaurants = ["Carolina Brewery", "Spicy 9", "Bandidos","IP3","Mellow Mushroom","Lucha Tigre","Moes","Chipotle"];
+
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
       sOTD = /^\/scum of the day$/;
       beer = /^\/beer$/;
+      dinner = /^\/dinner$/;
 
   this.res.writeHead(200);
 
@@ -17,6 +20,8 @@ function respond() {
     postMessage("You guys should be drinking " + beers[Math.floor(Math.random()*beers.length)] + " tonight");
   } else if(request.text.indexOf("bored") !== -1) {
     postMessage("Want to play soccer in an hour?")
+  } else if(dinner.test(request.text)) {
+    postMessage("Let's get " + restaurants[Math.floor(Math.random()*restaurants.length)] + " tonight");
   }
 
   this.res.end();
