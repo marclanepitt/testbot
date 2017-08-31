@@ -2,7 +2,7 @@ var HTTPS = require('https');
 
 var botID = process.env.BOT_ID;
 
-var beers = ['Bud Light', 'Platinums', "Bud Heavy", "Blue Moon","Nattys","Corona","Miller","Coors"]
+var beers = ['Bud Light', 'Platinums', "Bud Heavy", "Blue Moon","Nattys","Corona","Miller","Coors"];
 
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
@@ -12,15 +12,9 @@ function respond() {
   this.res.writeHead(200);
 
   if(request.text && sOTD.test(request.text)) {
-  postMessage("Text: " + JSON.stringify(request) + "\nName: " + request.name);
-  }
-
-  else if(beer.test(request.text)) {
+    postMessage("Text: " + JSON.stringify(request) + "\nName: " + request.name);
+  } else if(beer.test(request.text)) {
     postMessage("You guys should be drinking " + beers[Math.floor(Math.random()*beers.length)] + " tonight");
-  }
-
-  else if(request.text.includes("bored")) {
-    postMessage("Anyone want to play soccer in an hour?");
   }
 
   this.res.end();
