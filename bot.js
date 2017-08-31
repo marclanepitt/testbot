@@ -24,14 +24,14 @@ function respond() {
   } else if(dinner.test(request.text)) {
     postMessage("Let's get " + restaurants[Math.floor(Math.random()*restaurants.length)] + " tonight");
   } else if(dadJoke.test(request.text)) {
-    fetch('https://icanhazdadjoke.com/', {
-      method: 'get'
-    }).then((resp) => resp.json())
-      .then(function(data) {
-        postMessage(JSON.stringify(data));
-    }).catch(function(err) {
-      // Error :(
-    });
+    // fetch('https://icanhazdadjoke.com/', {
+    //   method: 'get'
+    // }).then((resp) => resp.json())
+    //   .then(function(data) {
+    //     postMessage(JSON.stringify(data));
+    // }).catch(function(err) {
+    //   // Error :(
+    // });
   }
 
   this.res.end();
