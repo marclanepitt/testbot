@@ -5,23 +5,26 @@ var botID = process.env.BOT_ID;
 
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
-      botRegex = /^\/cool guy$/;
+      botRegex = /^\/scum of the day$/;
 
+  this.res.writeHead(200);
   if(request.text && botRegex.test(request.text)) {
-    this.res.writeHead(200);
-    postMessage();
-    this.res.end();
-  } else {
-    console.log("don't care");
-    this.res.writeHead(200);
-    this.res.end();
+    postMessage("test");
+  } else if(request.name == "Jake") {
+    postMessage("@Zo whats good fam?");
+  } else if(request.name == "Dave") {
+    postMessage("^stinky");
+  } else if(request.name == "Garrett") {
+    postMessage("^sucks at smash");
   }
+  this.res.end();
+
 }
 
-function postMessage() {
+function postMessage(message) {
   var botResponse, options, body, botReq;
 
-  botResponse = cool();
+  botResponse = message;
 
   options = {
     hostname: 'api.groupme.com',
