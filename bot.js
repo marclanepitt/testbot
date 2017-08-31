@@ -4,10 +4,13 @@ var botID = process.env.BOT_ID;
 
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
-      botRegex = /^\/scum of the day$/;
+      sOTD = /^\/scum of the day$/;
+      beer = /^\/beer$/;
   this.res.writeHead(200);
-  if(request.text && botRegex.test(request.text)) {
-  postMessage("Text: " + request.text + "\nName: " + request.name);
+  if(request.text && sOTD.test(request.text)) {
+  postMessage("Text: " + JSON.stringify(request) + "\nName: " + request.name);
+  } else if(beer.test(request.text)) {
+
   }
   this.res.end();
 }
