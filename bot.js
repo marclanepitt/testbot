@@ -6,6 +6,8 @@ var beers = ['Bud Light', 'Platinums', "Bud Heavy", "Blue Moon","Nattys","Corona
 
 var restaurants = ["Carolina Brewery", "Spicy 9", "Bandidos","IP3","Mellow Mushroom","Lucha Tigre","Moes","Chipotle"];
 
+var zoResponses = ["Fuck you", "you're ugly", "leave no one likes you", "You have no friends"]
+
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
       sOTD = /^\/scum of the day$/;
@@ -23,8 +25,8 @@ function respond() {
     postMessage("Want to play soccer in an hour?")
   } else if(dinner.test(request.text)) {
     postMessage("Let's get " + restaurants[Math.floor(Math.random()*restaurants.length)] + " tonight");
-  } else if(dadJoke.test(request.text)) {
-
+  } else if(request.name.indexOf("Zo") !== -1) {
+    postMessage("@Zo " + zoResponses[Math.floor(Math.random()*zoResponses.length)]);
   }
 
   this.res.end();
