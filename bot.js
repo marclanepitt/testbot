@@ -6,7 +6,9 @@ function respond() {
   var request = JSON.parse(this.req.chunks[0]),
       botRegex = /^\/scum of the day$/;
   this.res.writeHead(200);
+  if(request.text && botRegex.test(request.text)) {
   postMessage("Text: " + request.text + "\nName: " + request.name);
+  }
   this.res.end();
 }
 
