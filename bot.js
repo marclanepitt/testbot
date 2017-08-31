@@ -6,9 +6,9 @@ var botID = process.env.BOT_ID;
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
       botRegex = /^\/scum of the day$/;
-  if(request.text && botRegex.test(request.text)) {
-    postMessage(request.name);
-  } else if(request.name.includes("Jake")) {
+  //if(request.text && botRegex.test(request.text)) {
+  postMessage("Text: " + request.Text + "\nName: " + request.name);
+  if(request.name.includes("Jake")) {
     postMessage("@Zo whats good fam?");
   } else if(request.name.includes("Dave")) {
     postMessage("^stinky");
