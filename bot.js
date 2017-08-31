@@ -1,7 +1,5 @@
 var HTTPS = require('https');
 
-var axios = require('axios');
-
 var botID = process.env.BOT_ID;
 
 var beers = ['Bud Light', 'Platinums', "Bud Heavy", "Blue Moon","Nattys","Corona","Miller","Coors"];
@@ -26,9 +24,7 @@ function respond() {
   } else if(dinner.test(request.text)) {
     postMessage("Let's get " + restaurants[Math.floor(Math.random()*restaurants.length)] + " tonight");
   } else if(dadJoke.test(request.text)) {
-    axios.get('https://icanhazdadjoke.com/').then(response =>
-        postMessage(response.joke);
-      )
+    
   }
 
   this.res.end();
