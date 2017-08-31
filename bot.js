@@ -15,6 +15,8 @@ function respond() {
     postMessage("Text: " + JSON.stringify(request) + "\nName: " + request.name);
   } else if(beer.test(request.text)) {
     postMessage("You guys should be drinking " + beers[Math.floor(Math.random()*beers.length)] + " tonight");
+  } else if(request.text.indexOf("bored") !== -1) {
+    postMessage("Want to play soccer in an hour?")
   }
 
   this.res.end();
