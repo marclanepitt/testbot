@@ -24,7 +24,7 @@ function respond() {
   } else if(dinner.test(request.text)) {
     postMessage("Let's get " + restaurants[Math.floor(Math.random()*restaurants.length)] + " tonight");
   } else if(dadJoke.test(request.text)) {
-    fetch('https://davidwalsh.name/some/url', {
+    fetch('https://icanhazdadjoke.com/', {
       method: 'get'
     }).then(function(response) {
       postMessage(response.joke);
