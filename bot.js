@@ -10,11 +10,11 @@ function respond() {
   this.res.writeHead(200);
   if(request.text && botRegex.test(request.text)) {
     postMessage("test");
-  } else if(request.name == "Jake") {
+  } else if(request.name.includes("Jake")) {
     postMessage("@Zo whats good fam?");
-  } else if(request.name == "Dave") {
+  } else if(request.name.includes("Dave")) {
     postMessage("^stinky");
-  } else if(request.name == "Garrett") {
+  } else if(request.name.includes("Garrett")) {
     postMessage("^sucks at smash");
   }
   this.res.end();
