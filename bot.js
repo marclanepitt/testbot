@@ -26,8 +26,9 @@ function respond() {
   } else if(dadJoke.test(request.text)) {
     fetch('https://icanhazdadjoke.com/', {
       method: 'get'
-    }).then(function(response) {
-      postMessage(response.joke);
+    }).then((resp) => resp.json())
+      .then(function(data) {
+        postMessage(JSON.stringify(data));
     }).catch(function(err) {
       // Error :(
     });
