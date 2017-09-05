@@ -21,6 +21,9 @@ function respond() {
   } else if(dinner.test(request.text)) {
     postMessage("Let's get " + restaurants[Math.floor(Math.random()*restaurants.length)] + " tonight");
   }
+  if(request.name.indexOf("Dave") !== -1) {
+    postMessage("^ Stinky");
+  }
 
   this.res.end();
 }
