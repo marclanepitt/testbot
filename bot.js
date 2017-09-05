@@ -6,14 +6,11 @@ var beers = ['Bud Light', 'Platinums', "Bud Heavy", "Blue Moon","Nattys","Corona
 
 var restaurants = ["Carolina Brewery", "Spicy 9", "Bandidos","IP3","Mellow Mushroom","Lucha Tigre","Moes","Chipotle"];
 
-var zoResponses = ["Fuck you", "you're ugly", "leave no one likes you", "You have no friends"]
-
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
       sOTD = /^\/scum of the day$/;
       beer = /^\/beer$/;
       dinner = /^\/dinner$/;
-      dadJoke = /^\/dad$/;
 
   this.res.writeHead(200);
 
@@ -21,12 +18,8 @@ function respond() {
     postMessage("Text: " + JSON.stringify(request) + "\nName: " + request.name);
   } else if(beer.test(request.text)) {
     postMessage("You guys should be drinking " + beers[Math.floor(Math.random()*beers.length)] + " tonight");
-  } else if(request.text.indexOf("bored") !== -1) {
-    postMessage("Want to play soccer in an hour?")
   } else if(dinner.test(request.text)) {
     postMessage("Let's get " + restaurants[Math.floor(Math.random()*restaurants.length)] + " tonight");
-  } else if(request.name.indexOf("Zo") !== -1) {
-    postMessage("@Zo " + zoResponses[Math.floor(Math.random()*zoResponses.length)]);
   }
 
   this.res.end();
@@ -52,7 +45,6 @@ function postMessage(message) {
 
   botReq = HTTPS.request(options, function(res) {
       if(res.statusCode == 202) {
-        //neat
       } else {
         console.log('rejecting bad status code ' + res.statusCode);
       }
