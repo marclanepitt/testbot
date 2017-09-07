@@ -33,6 +33,9 @@ function respond() {
   if(smallFry.test(request.text)) {
     postMessage("When you get screwed out of a small fry", "https://i.groupme.com/540x960.jpeg.829fb06a5d94408895a6e7d59562a1ab");
   }
+  if(request.text.indexOf("Push me to the edge") !== -1) {
+    postMessage("","https://i.groupme.com/750x1334.jpeg.4e0db5f28b65414fb43e322cd9146a91")
+  }
 
   this.res.end();
 }
