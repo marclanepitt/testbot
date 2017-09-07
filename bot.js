@@ -4,29 +4,40 @@ var botID = process.env.BOT_ID;
 
 var beers = ['Bud Light', 'Platinums', "Bud Heavy", "Blue Moon","Nattys","Corona","Miller","Coors"];
 
-var restaurants = ["Carolina Brewery", "Spicy 9", "Bandidos","IP3","Mellow Mushroom","Lucha Tigre","Moes","Chipotle"];
+var restaurants = ["Carolina Brewery", "Spicy 9", "Bandidos","IP3","Mellow Mushroom","Lucha Tigre","Moes","Chipotle", "Rams"];
 
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
       sOTD = /^\/scum of the day$/;
       beer = /^\/beer$/;
       dinner = /^\/dinner$/;
+      smallFry = /^\/smallfry$/;
 
   this.res.writeHead(200);
 
   if(request.text && sOTD.test(request.text)) {
     postMessage("Text: " + JSON.stringify(request) + "\nName: " + request.name);
-  } else if(beer.test(request.text)) {
+  }
+  if(beer.test(request.text)) {
     postMessage("You guys should be drinking " + beers[Math.floor(Math.random()*beers.length)] + " tonight");
-  } else if(dinner.test(request.text)) {
+  }
+  if(dinner.test(request.text)) {
     postMessage("Let's get " + restaurants[Math.floor(Math.random()*restaurants.length)] + " tonight");
   }
-
+  if(request.name.indexOf("Christian") !== -1) {
+    postMessage("");
+  }
+  if(request.text.indexOf("What did Andrew buy?") !== -1) {
+    postMessage("The Blue Moons");
+  }
+  if(smallFry.test(request.text)) {
+    postMessage("When you get screwed out of a small fry", "https://i.groupme.com/540x960.jpeg.829fb06a5d94408895a6e7d59562a1ab");
+  }
 
   this.res.end();
 }
 
-function postMessage(message) {
+function postMessage(message, image_url) {
   var botResponse, options, body, botReq;
 
   botResponse = message;
@@ -36,12 +47,23 @@ function postMessage(message) {
     path: '/v3/bots/post',
     method: 'POST'
   };
-
-  body = {
-    "bot_id" : botID,
-    "text" : botResponse
-  };
-
+  if(image_url != null) {
+    body = {
+      "bot_id" : botID,
+      "text" : botResponse,
+      "attachments" : [
+         {
+           "type"  : "image",
+           "url"   : image_url
+          }
+      ]
+    }
+  } else {
+    body = {
+      "bot_id" : botID,
+      "text" : botResponse
+    };
+  }
   console.log('sending ' + botResponse + ' to ' + botID);
 
   botReq = HTTPS.request(options, function(res) {
