@@ -37,9 +37,9 @@ function respond() {
   if(bored.test(request.text)) {
     postMessage("Copy and Paste the message below and send it with your first move to start");
     postMessage("Tic Tac Toe                              \
-                  - - - \
-                  - - - \
-                  - - -")
+                                                    - - - \
+                                                    - - - \
+                                                    - - -")
   }
   if(request.text.indexOf("Tic Tac Toe") !== -1 && request.name != "Scum Guy") {
     
