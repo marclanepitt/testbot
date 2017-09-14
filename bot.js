@@ -34,18 +34,18 @@ function respond() {
   if(request.text.indexOf("Push me to the edge") !== -1) {
     postMessage("","https://i.groupme.com/750x1334.jpeg.4e0db5f28b65414fb43e322cd9146a91")
   }
-  if(bored.test(request.text)) {
-    postMessage("Copy and Paste the message below and send it with your first move to start");
-    postMessage("Tic Tac Toe                              \
-                                                    - - - \
-                                                                 - - - \
-                                                                 - - -")
-  }
-  if(request.text.indexOf("Tic Tac Toe") !== -1 && request.name != "Scum Guy") {
-    var tic = request.text;
-    var tac;
-    postMessage(tic.length);
-  }
+  // if(bored.test(request.text)) {
+  //   postMessage("Copy and Paste the message below and send it with your first move to start");
+  //   postMessage("Tic Tac Toe                              \
+  //                                                   - - - \
+  //                                                                - - - \
+  //                                                                - - -")
+  // }
+  // if(request.text.indexOf("Tic Tac Toe") !== -1 && request.name != "Scum Guy") {
+  //   var tic = request.text;
+  //   var tac;
+  //   postMessage(tic.length);
+  // }
 
   this.res.end();
 }
