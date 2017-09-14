@@ -42,7 +42,9 @@ function respond() {
                                                                  - - -")
   }
   if(request.text.indexOf("Tic Tac Toe") !== -1 && request.name != "Scum Guy") {
-    
+    var tic = request.text;
+    var tac;
+    postMessage(tic.length);
   }
 
   this.res.end();
