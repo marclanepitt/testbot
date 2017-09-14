@@ -12,6 +12,7 @@ function respond() {
       beer = /^\/beer$/;
       dinner = /^\/dinner$/;
       smallFry = /^\/smallfry$/;
+      bored = /^\/bored$/;
 
   this.res.writeHead(200);
 
@@ -24,9 +25,6 @@ function respond() {
   if(dinner.test(request.text)) {
     postMessage("Let's get " + restaurants[Math.floor(Math.random()*restaurants.length)] + " tonight");
   }
-  if(request.name.indexOf("Christian") !== -1) {
-    postMessage("");
-  }
   if(request.text.indexOf("What did Andrew buy?") !== -1) {
     postMessage("The Blue Moons");
   }
@@ -35,6 +33,9 @@ function respond() {
   }
   if(request.text.indexOf("Push me to the edge") !== -1) {
     postMessage("","https://i.groupme.com/750x1334.jpeg.4e0db5f28b65414fb43e322cd9146a91")
+  }
+  if(bored.test(request.text)) {
+    postMessage("Copy and Paste this message and send it with your first move to start");
   }
 
   this.res.end();
