@@ -36,7 +36,7 @@ function respond() {
   }
   if(bored.test(request.text)) {
     postMessage("Copy and Paste the message below and send it with your first move to start");
-    postMessage("Tic Tac Toe                      \
+    postMessage("Tic Tac Toe                              \
                   - - - \
                   - - - \
                   - - -")
