@@ -38,7 +38,7 @@ function respond() {
     postMessage("I'm pretty spiritually aware and religious. It adds a layer to my life that does assist me greatly.");
   }
   if(request.text.indexOf("$") !== -1) {
-    postMessage("Money is the root of all evil");
+    postMessage("Money is the root of all evil " + request.name + "!");
   }
   
   // if(bored.test(request.text)) {
