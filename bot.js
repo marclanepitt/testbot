@@ -35,8 +35,12 @@ function respond() {
     postMessage("","https://i.groupme.com/750x1334.jpeg.4e0db5f28b65414fb43e322cd9146a91")
   }
   if(request.name.indexOf("Andre") !== -1 ) {
-    postMessage("I'm pretty spiritually aware and religious. It adds a layer to my life that does assist me greatly.")
+    postMessage("I'm pretty spiritually aware and religious. It adds a layer to my life that does assist me greatly.");
   }
+  if(request.text.indexOf("$") !== -1) {
+    postMessage("Money is the root of all evil");
+  }
+  
   // if(bored.test(request.text)) {
   //   postMessage("Copy and Paste the message below and send it with your first move to start");
   //   postMessage("Tic Tac Toe                              \
