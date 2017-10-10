@@ -18,15 +18,14 @@ function respond() {
       smallFry = /^\/smallfry$/;
       bored = /^\/bored$/;
 
-  var index = Math.random() *array.length;
+  var index = Math.floor(Math.random() *array.length);
 
   this.res.writeHead(200);
 
   if((request.name.indexOf("Marc") !== -1 || request.name.indexOf("Jake") !== -1) && request.text.indexOf("Scumguy roast") !==-1) {
-      // var roastedPerson = request.text.substring(13,request.text.length);
-      // var insult = array[index];
-      // postMessage(roastedPerson+"," + insult);
-      postMessage(Math.random()*array.length);
+      var roastedPerson = request.text.substring(13,request.text.length);
+      var insult = array[index];
+      postMessage(roastedPerson+"," + insult);
   }
 
   // if(request.text && sOTD.test(request.text)) {
