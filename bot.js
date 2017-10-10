@@ -21,8 +21,9 @@ function respond() {
 
   if((request.name.indexOf("Marc") !== -1 || request.name.indexOf("Jake") !== -1) && request.text.indexOf("Scumguy roast") !==-1) {
       roastedPerson = request.text.substring(13,request.text.length);
-      insult = insults[0];
-      postMessage(insult + roastedPerson);
+      index = Math.random() * insults.length;
+      insult = insults[index];
+      postMessage(roastedPerson+"," + insult);
   }
 
   // if(request.text && sOTD.test(request.text)) {
