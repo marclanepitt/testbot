@@ -6,6 +6,14 @@ var beers = ['Bud Light', 'Platinums', "Bud Heavy", "Blue Moon","Nattys","Corona
 
 var restaurants = ["Carolina Brewery", "Spicy 9", "Bandidos","IP3","Mellow Mushroom","Lucha Tigre","Moes","Chipotle", "Rams"];
 
+function getRandomLine(filename){
+  fs.readFile(filename, function(err, data){
+    if(err) throw err;
+    var lines = data.split('\n');
+    return lines[Math.floor(Math.random()*lines.length)];
+ })
+}
+
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
       sOTD = /^\/scum of the day$/;
@@ -18,7 +26,8 @@ function respond() {
 
   if((request.name.indexOf("Marc") !== -1 || request.name.indexOf("Jake") !== -1) && request.text.indexOf("Scumguy roast") !==-1) {
       roastedPerson = request.text.substring(13,request.text.length);
-      postMessage("You suck "+ roastedPerson);
+      insult = getRandomLine('shittalk.csv');
+      postMessage(insult + roastedPerson);
   }
 
   // if(request.text && sOTD.test(request.text)) {
