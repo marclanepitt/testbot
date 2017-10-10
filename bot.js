@@ -25,6 +25,7 @@ function respond() {
   if((request.name.indexOf("Marc") !== -1 || request.name.indexOf("Jake") !== -1) && request.text.indexOf("Scumguy roast") !==-1) {
       var roastedPerson = request.text.substring(13,request.text.length);
       var insult = array[index];
+      insult = insult.substring(4,insult.length);
       postMessage(roastedPerson+"," + insult);
   }
 
