@@ -9,9 +9,6 @@ var restaurants = ["Carolina Brewery", "Spicy 9", "Bandidos","IP3","Mellow Mushr
 var fs = require('fs')
 
 var array = fs.readFileSync('shittalk.txt').toString().split("\n");
-for(i in array) {
-    console.log(array[i]);
-}
 
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
@@ -21,12 +18,14 @@ function respond() {
       smallFry = /^\/smallfry$/;
       bored = /^\/bored$/;
 
+  var index = Math.random() *array.length;
+
   this.res.writeHead(200);
 
   if((request.name.indexOf("Marc") !== -1 || request.name.indexOf("Jake") !== -1) && request.text.indexOf("Scumguy roast") !==-1) {
       var roastedPerson = request.text.substring(13,request.text.length);
       var index = Math.random() * insults.length;
-      var insult = insults[index];
+      var insult = array[index];
       postMessage(roastedPerson+"," + insult);
   }
 
