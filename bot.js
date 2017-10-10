@@ -20,9 +20,9 @@ function respond() {
   this.res.writeHead(200);
 
   if((request.name.indexOf("Marc") !== -1 || request.name.indexOf("Jake") !== -1) && request.text.indexOf("Scumguy roast") !==-1) {
-      roastedPerson = request.text.substring(13,request.text.length);
-      index = Math.random() * insults.length;
-      insult = insults[index];
+      var roastedPerson = request.text.substring(13,request.text.length);
+      var index = Math.random() * insults.length;
+      var insult = insults[index];
       postMessage(roastedPerson+"," + insult);
   }
 
