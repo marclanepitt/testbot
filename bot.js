@@ -26,7 +26,7 @@ function respond() {
       // var roastedPerson = request.text.substring(13,request.text.length);
       // var insult = array[index];
       // postMessage(roastedPerson+"," + insult);
-      postMessage(array[0]);
+      postMessage(Math.random()*array.length);
   }
 
   // if(request.text && sOTD.test(request.text)) {
