@@ -31,7 +31,12 @@ function respond() {
   }
   if(request.text.indexOf("Scumguy compliment") !==-1) {
       var index = Math.floor(Math.random() *compliments.length);
-      var complimentedPerson = request.text.substring(18,request.text.length);
+      var complimentedPerson ="";
+      if(request.text.substring(18,request.text.length) == "me") {
+        complimentedPerson = request.name;
+      } else {
+        complimentedPerson = request.text.substring(18,request.text.length);
+      }
       var compliment = compliments[index];
       compliment = compliment.toLowerCase();
       postMessage(complimentedPerson+"," + compliment);
