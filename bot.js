@@ -42,6 +42,10 @@ function respond() {
       postMessage(complimentedPerson+"," + compliment);
   }
 
+  if(request.text.indexOf("burn baby burn") !== -1) {
+    postMessage("","https://i.groupme.com/750x1334.png.b63f3de37659403e89c857afa293dc38");
+  }
+
 
   // if(request.text && sOTD.test(request.text)) {
   //   postMessage("Text: " + JSON.stringify(request) + "\nName: " + request.name);
