@@ -10,6 +10,8 @@ var fs = require('fs')
 
 var array = fs.readFileSync('shittalk.txt').toString().split("\n");
 
+var compliments = fs.readFileSync('compliments.txt').toString().split("\n");
+
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
       sOTD = /^\/scum of the day$/;
@@ -28,6 +30,13 @@ function respond() {
       insult = insult.substring(4,insult.length-1).toLowerCase();
       postMessage(roastedPerson+"," + insult);
   }
+  if(request.text.indexOf("Scumguy compliment") !==-1) {
+      var complimentedPerson = request.text.substring(18,request.text.length);
+      var compliment = compliments[index];
+      compliment = compliment.toLowerCase();
+      postMessage(complimentedPerson+"," + compliment);
+  }
+
 
   // if(request.text && sOTD.test(request.text)) {
   //   postMessage("Text: " + JSON.stringify(request) + "\nName: " + request.name);

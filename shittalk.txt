@@ -393,7 +393,6 @@
 "say Just because you have the ability to click play doesn't mean you should."
 "say I'd make a joke, but you're already here"
 "say Can't hear you from the bottom of the scoreboard"
-"say When your parents said shoot for the stars, this is not what they meant."
 "say If I wanted to kill myself I'd climb your ego and jump to your IQ."
 "say The way you're feeding, Africa may finally have a chance."
 "say I'm not saying you're useless, but I'd unplug your router to charge my phone. "
