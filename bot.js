@@ -34,8 +34,7 @@ function respond() {
       var insult = array[index];
       insult = insult.substring(4,insult.length-1).toLowerCase();
       postMessage(roastedPerson+"," + insult);
-  }
-  if(request.text.indexOf("Scumguy compliment") !==-1) {
+  } else if(request.text.indexOf("Scumguy compliment") !==-1) {
       var complimentedPerson = "";
       if(request.text.substring(18,request.text.length) == "me") {
         complimentedPerson = request.name;
