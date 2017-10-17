@@ -25,13 +25,23 @@ function respond() {
   this.res.writeHead(200);
 
   if(request.text.indexOf("Scumguy roast") !==-1) {
-      var roastedPerson = request.text.substring(13,request.text.length);
+      var roastedPerson = "";
+      if(request.text.substring(13,request.text.length) == "me") {
+        roastedPerson = request.name;
+      } else {
+        roastedPerson = request.text.substring(13,request.text.length);
+      }
       var insult = array[index];
       insult = insult.substring(4,insult.length-1).toLowerCase();
       postMessage(roastedPerson+"," + insult);
   }
   if(request.text.indexOf("Scumguy compliment") !==-1) {
-      var complimentedPerson = request.text.substring(18,request.text.length);
+      var complimentedPerson = "";
+      if(request.text.substring(18,request.text.length) == "me") {
+        complimentedPerson = request.name;
+      } else {
+        complimentedPerson = request.text.substring(18,request.text.length);
+      }
       var compliment = compliments[index];
       compliment = compliment.toLowerCase();
       postMessage(complimentedPerson+"," + compliment);
