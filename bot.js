@@ -76,24 +76,7 @@ function searchGiphy(giphyToSearch) {
         var id = JSON.parse(str).data[0].id;
         var giphyURL = 'http://i.giphy.com/' + id + '.gif';
 
-        var options = {
-          host: 'image.groupme.com',
-          path: '/pictures'
-        }
-
-        var gmCallback = function(response) {
-          var str = '';
-
-          response.on('data', function(chunck){
-            str += chunck;
-          });
-
-          response.on('end', function() {
-            console.log(str)
-          });
-        }
-        HTTPS.request(options, gmCallback)
-
+        postMessage(giphyURL)
       }
     });
   };
