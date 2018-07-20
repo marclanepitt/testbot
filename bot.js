@@ -50,7 +50,6 @@ function respond() {
   if(request.text.indexOf("/giphy") !== 1) {
     postMessage("Doing something");
     //searchGiphy(request.text.substring(7,request.text.length));
-
   }
 
   this.res.end();
