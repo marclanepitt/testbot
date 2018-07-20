@@ -43,6 +43,11 @@ function respond() {
       postMessage(complimentedPerson+"," + compliment);
   }
 
+  if(request.text.indexOf("giphy") !== -1) {
+    var key = request.text.substring(5,request.text.length);
+    searchGiphy(key);
+  }
+
   if(request.text.indexOf("burn") !== -1) {
     postMessage("","https://i.groupme.com/750x1334.png.b63f3de37659403e89c857afa293dc38");
   }
