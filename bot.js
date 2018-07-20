@@ -75,7 +75,7 @@ function searchGiphy(giphyToSearch) {
       } else {
         var id = JSON.parse(str).data[0].id;
         var giphyURL = 'http://i.giphy.com/' + id + '.gif';
-        postMessage(giphyURL);
+        postMessage("",giphyURL);
       }
     });
   };
