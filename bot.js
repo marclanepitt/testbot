@@ -47,7 +47,7 @@ function respond() {
     postMessage("","https://i.groupme.com/750x1334.png.b63f3de37659403e89c857afa293dc38");
   }
 
-  if(request.text.substring(0,6) === "/giphy") {
+  if(request.text.length > 1) {
     postMessage("Doing something")
     searchGiphy(request.text.substring(7,request.text.length));
 
