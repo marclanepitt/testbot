@@ -1,6 +1,7 @@
 var HTTPS = require('https');
 
 var botID = process.env.BOT_ID;
+var apiKey = process.env.API_KEY;
 
 var beers = ['Bud Light', 'Platinums', "Bud Heavy", "Blue Moon","Nattys","Corona","Miller","Coors"];
 
@@ -46,47 +47,45 @@ function respond() {
     postMessage("","https://i.groupme.com/750x1334.png.b63f3de37659403e89c857afa293dc38");
   }
 
+  if(request.text.substring(0,6) === "/giphy") {
+    searchGiphy(request.text.substring(7,request.text.length));
 
-  // if(request.text && sOTD.test(request.text)) {
-  //   postMessage("Text: " + JSON.stringify(request) + "\nName: " + request.name);
-  // }
-  // if(beer.test(request.text)) {
-  //   postMessage("You guys should be drinking " + beers[Math.floor(Math.random()*beers.length)] + " tonight");
-  // }
-  // if(dinner.test(request.text)) {
-  //   postMessage("Let's get " + restaurants[Math.floor(Math.random()*restaurants.length)] + " tonight");
-  // }
-  // if(request.text.indexOf("What did Andrew buy?") !== -1) {
-  //   postMessage("The Blue Moons");
-  // }
-  // if(smallFry.test(request.text)) {
-  //   postMessage("When you get screwed out of a small fry", "https://i.groupme.com/540x960.jpeg.829fb06a5d94408895a6e7d59562a1ab");
-  // }
-  // if(request.text.indexOf("Push me to the edge") !== -1) {
-  //   postMessage("","https://i.groupme.com/750x1334.jpeg.4e0db5f28b65414fb43e322cd9146a91")
-  // }
-  // if(request.name.indexOf("Andre") !== -1 ) {
-  //   postMessage("I'm pretty spiritually aware and religious. It adds a layer to my life that does assist me greatly.");
-  // }
-  // if(request.text.indexOf("$") !== -1) {
-  //   postMessage("Money is the root of all evil " + request.name + "!");
-  // }
-  
-  // if(bored.test(request.text)) {
-  //   postMessage("Copy and Paste the message below and send it with your first move to start");
-  //   postMessage("Tic Tac Toe                              \
-  //                                                   - - - \
-  //                                                                - - - \
-  //                                                                - - -")
-  // }
-  // if(request.text.indexOf("Tic Tac Toe") !== -1 && request.name != "Scum Guy") {
-  //   var tic = request.text;
-  //   var tac;
-  //   postMessage(tic.length);
-  // }
+  }
 
   this.res.end();
 }
+
+function searchGiphy(giphyToSearch) {
+  var options = {
+    host: 'api.giphy.com',
+    path: '/v1/gifs/search?q=' + encodeQuery(giphyToSearch) + '&api_key=' + apiKey
+  };
+
+  var callback = function(response) {
+    var str = '';
+
+    response.on('data', function(chunck){
+      str += chunck;
+    });
+
+    response.on('end', function() {
+      if (!(str && JSON.parse(str).data[0])) {
+        postMessage('Couldn\'t find a gif 💩');
+      } else {
+        var id = JSON.parse(str).data[0].id;
+        var giphyURL = 'http://i.giphy.com/' + id + '.gif';
+        postMessage(giphyURL);
+      }
+    });
+  };
+
+  HTTP.request(options, callback).end();
+}
+
+function encodeQuery(query) {
+  return query.replace(/\s/g, '+');;
+}
+
 
 function postMessage(message, image_url) {
   var botResponse, options, body, botReq;
