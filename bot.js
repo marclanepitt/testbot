@@ -48,6 +48,7 @@ function respond() {
   }
 
   if(request.text.substring(0,6) === "/giphy") {
+    postMessage("Doing something")
     searchGiphy(request.text.substring(7,request.text.length));
 
   }
