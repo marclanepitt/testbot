@@ -79,7 +79,7 @@ function searchGiphy(giphyToSearch) {
     });
   };
 
-  HTTP.request(options, callback).end();
+  HTTPS.request(options, callback).end();
 }
 
 function encodeQuery(query) {
