@@ -48,8 +48,8 @@ function respond() {
   }
 
   if(request.text.length > 1) {
-    postMessage("Doing something")
-    searchGiphy(request.text.substring(7,request.text.length));
+    postMessage("Doing something");
+    //searchGiphy(request.text.substring(7,request.text.length));
 
   }
 
