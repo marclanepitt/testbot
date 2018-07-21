@@ -35,10 +35,8 @@ function searchGiphy(giphyToSearch) {
     }
     var cm = function() {
       body = JSON.parse(body);
-      var url = body.data[0].images.fixed_height_still.url;
+      var url = body.data[0].images.fixed_width.url;
         var callback = function(resp) {
-          resp.setEncoding('base64');
-          var image = "data:" + resp.headers["content-type"] + ";base64,";
           image ='';
           var gb = function(data) {
             image +=data;
@@ -67,7 +65,7 @@ function postToImageService(image) {
       path: '/pictures',
       headers : {
         'X-Access-Token': gmKey,
-        'Content-Type': 'image/jpeg'
+        'Content-Type': 'image/gif'
       },
       method: 'POST',
       body: image
