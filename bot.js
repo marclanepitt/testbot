@@ -43,20 +43,20 @@ function respond() {
       postMessage(complimentedPerson+"," + compliment);
   }
 
-  if(request.text.indexOf("giphy") !== -1) {
-    var key = request.text.substring(5,request.text.length);
-    searchGiphy(key);
-  }
-
   if(request.text.indexOf("burn") !== -1) {
     postMessage("","https://i.groupme.com/750x1334.png.b63f3de37659403e89c857afa293dc38");
+  }
+
+  if(request.text.length > 1) {
+    postMessage("Doing something")
+    searchGiphy(request.text.substring(7,request.text.length));
+
   }
 
   this.res.end();
 }
 
 function searchGiphy(giphyToSearch) {
-
   var options = {
     host: 'api.giphy.com',
     path: '/v1/gifs/search?q=' + encodeQuery(giphyToSearch) + '&api_key=' + apiKey
@@ -75,13 +75,12 @@ function searchGiphy(giphyToSearch) {
       } else {
         var id = JSON.parse(str).data[0].id;
         var giphyURL = 'http://i.giphy.com/' + id + '.gif';
-
-        postMessage(giphyURL)
+        postMessage("",giphyURL);
       }
     });
   };
 
-  HTTPS.request(options, callback).end();
+  HTTP.request(options, callback).end();
 }
 
 function encodeQuery(query) {
