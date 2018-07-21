@@ -45,6 +45,7 @@ function searchGiphy(giphyToSearch) {
           }
           var gm = function() {
             var binaryData = new Buffer(image, 'base64').toString('binary');
+            console.log(binaryData)
             postToImageService(binaryData);
           }
           resp.on('data', gb);
