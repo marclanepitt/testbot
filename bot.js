@@ -36,7 +36,8 @@ function searchGiphy(giphyToSearch) {
       body +=data;
     }
     var cm = function() {
-      var url = body.data[0].images.fixed_width.url;
+      console.log(body);
+      var url = body['data'][0].images.fixed_width.url;
         var callback = function(resp) {
           resp.setEncoding('base64');
           var image = "data:" + resp.headers["content-type"] + ";base64,";
