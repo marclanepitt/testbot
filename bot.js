@@ -29,14 +29,12 @@ function searchGiphy(giphyToSearch) {
   };
 
   var callback = function(resp) {
-    // resp.setEncoding('base64');
-    // var body = "data:" + resp.headers["content-type"] + ";base64,";
     body ='';
     var cb = function(data) {
       body +=data;
     }
     var cm = function() {
-      console.log(body.data);
+      console.log(body[0]);
       var url = body['data'][0].images.fixed_width.url;
         var callback = function(resp) {
           resp.setEncoding('base64');
