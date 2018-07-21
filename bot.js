@@ -67,7 +67,7 @@ function postToImageService(image) {
       path: '/pictures',
       headers : {
         'X-Access-Token': gmKey,
-        'Content-Type': 'image/gif'
+        'Content-Type': 'image/jpeg'
       },
       method: 'POST',
       body: image
