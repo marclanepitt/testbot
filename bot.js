@@ -23,7 +23,8 @@ function respond() {
 function searchGiphy(giphyToSearch) {
   var options = {
     host: 'api.giphy.com',
-    path: '/v1/gifs/search?q=' + encodeQuery(giphyToSearch) + '&api_key=' + apiKey
+    path: '/v1/gifs/search?q=' + encodeQuery(giphyToSearch) + '&api_key=' + apiKey,
+    accept: 'image/*'
   };
 
   var callback = function(response) {
@@ -34,13 +35,7 @@ function searchGiphy(giphyToSearch) {
     });
 
     response.on('end', function() {
-      if (!(str && JSON.parse(str).data[0])) {
-        postMessage('Couldn\'t find a gif 💩');
-      } else {
-        var id = JSON.parse(str).data[0].id;
-        var giphyURL = 'http://i.giphy.com/' + id + '.gif';
-        postMessage(giphyURL);
-      }
+      postMessage(response)
     });
   };
 
