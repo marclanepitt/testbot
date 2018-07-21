@@ -35,8 +35,9 @@ function searchGiphy(giphyToSearch) {
     });
 
     response.on('end', function() {
-      postMessage(response)
     });
+    console.log(response)
+
   };
 
   HTTP.request(options, callback).end();
