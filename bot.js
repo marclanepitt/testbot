@@ -43,7 +43,7 @@ function respond() {
       postMessage(complimentedPerson+"," + compliment);
   }
 
-  if(request.text.indexOf("giphy") !== -1) {
+  if(request.text.indexOf("/giphy") !== -1 && request.name.toLowerCase().indexOf("guy") === -1) {
     var key = request.text.substring(5,request.text.length);
     searchGiphy(key);
   }
@@ -76,7 +76,7 @@ function searchGiphy(giphyToSearch) {
         var id = JSON.parse(str).data[0].id;
         var giphyURL = 'http://i.giphy.com/' + id + '.gif';
 
-        postMessage(giphyURL)
+        postMessage(giphyURL);
       }
     });
   };
