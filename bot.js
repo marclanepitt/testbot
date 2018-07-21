@@ -1,59 +1,23 @@
 var HTTPS = require('https');
+var HTTP = require('http');
 
 var botID = process.env.BOT_ID;
 var apiKey = process.env.API_KEY;
 
-var beers = ['Bud Light', 'Platinums', "Bud Heavy", "Blue Moon","Nattys","Corona","Miller","Coors"];
-
-var restaurants = ["Carolina Brewery", "Spicy 9", "Bandidos","IP3","Mellow Mushroom","Lucha Tigre","Moes","Chipotle", "Rams"];
-
-var fs = require('fs')
-
-var array = fs.readFileSync('shittalk.txt').toString().split("\n");
-
-var compliments = fs.readFileSync('compliments.txt').toString().split("\n");
-
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
-      sOTD = /^\/scum of the day$/;
-      beer = /^\/beer$/;
-      dinner = /^\/dinner$/;
-      smallFry = /^\/smallfry$/;
-      bored = /^\/bored$/;
+      giphyCommand = '/giphy';
 
-  this.res.writeHead(200);
-
-  if(request.text.indexOf("Scumguy roast") !==-1) {
-      var index = Math.floor(Math.random() *array.length);
-      var roastedPerson = request.text.substring(13,request.text.length);
-      var insult = array[index];
-      insult = insult.substring(4,insult.length-1).toLowerCase();
-      postMessage(roastedPerson+"," + insult);
+  if(request.text &&
+     request.text.length > giphyCommand.length &&
+     request.text.substring(0, giphyCommand.length) === giphyCommand) {
+    this.res.writeHead(200);
+    searchGiphy(request.text.substring(giphyCommand.length + 1));
+    this.res.end();
+  } else {
+    this.res.writeHead(200);
+    this.res.end();
   }
-  if(request.text.indexOf("Scumguy compliment") !==-1) {
-      var index = Math.floor(Math.random() *compliments.length);
-      var complimentedPerson ="";
-      if(request.text.substring(18,request.text.length) == "me") {
-        complimentedPerson = request.name;
-      } else {
-        complimentedPerson = request.text.substring(18,request.text.length);
-      }
-      var compliment = compliments[index];
-      compliment = compliment.toLowerCase();
-      postMessage(complimentedPerson+"," + compliment);
-  }
-
-  if(request.text.indexOf("burn") !== -1) {
-    postMessage("","https://i.groupme.com/750x1334.png.b63f3de37659403e89c857afa293dc38");
-  }
-
-  if(request.text.length > 1) {
-    postMessage("Doing something")
-    searchGiphy(request.text.substring(7,request.text.length));
-
-  }
-
-  this.res.end();
 }
 
 function searchGiphy(giphyToSearch) {
@@ -75,7 +39,7 @@ function searchGiphy(giphyToSearch) {
       } else {
         var id = JSON.parse(str).data[0].id;
         var giphyURL = 'http://i.giphy.com/' + id + '.gif';
-        postMessage("",giphyURL);
+        postMessage(giphyURL);
       }
     });
   };
@@ -87,8 +51,7 @@ function encodeQuery(query) {
   return query.replace(/\s/g, '+');;
 }
 
-
-function postMessage(message, image_url) {
+function postMessage(message) {
   var botResponse, options, body, botReq;
 
   botResponse = message;
@@ -98,29 +61,19 @@ function postMessage(message, image_url) {
     path: '/v3/bots/post',
     method: 'POST'
   };
-  if(image_url != null) {
-    body = {
-      "bot_id" : botID,
-      "text" : botResponse,
-      "attachments" : [
-         {
-           "type"  : "image",
-           "url"   : image_url
-          }
-      ]
-    }
-  } else {
-    body = {
-      "bot_id" : botID,
-      "text" : botResponse
-    };
-  }
+
+  body = {
+    "bot_id" : botID,
+    "text" : botResponse
+  };
+
   console.log('sending ' + botResponse + ' to ' + botID);
 
   botReq = HTTPS.request(options, function(res) {
       if(res.statusCode == 202) {
+        console.log('202 response');
       } else {
-        console.log('rejecting bad status code ' + res.statusCode);
+        console.log('rejecting bad status code from groupme:' + res.statusCode);
       }
   });
 
@@ -132,6 +85,5 @@ function postMessage(message, image_url) {
   });
   botReq.end(JSON.stringify(body));
 }
-
 
 exports.respond = respond;

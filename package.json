@@ -1,20 +1,21 @@
 {
-  "name": "node-js-getting-started",
-  "version": "0.1.2",
-  "description": "A sample Node.js app using Express 4",
+  "name": "groupme-giphy-bot",
+  "version": "0.0.1",
+  "description": "A simple bot for adding the /giphy command to GroupMe.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
-    "director": ""
+    "director": "",
+    "express": ""
   },
   "engines": {
-    "node": "0.10.x"
+    "node": "0.12.7"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heroku/node-js-getting-started"
+    "url": "https://github.com/phrmsilva/groupme-giphy-bot.git"
   },
   "keywords": [
     "node",

@@ -14,6 +14,7 @@ router = new director.http.Router({
 server = http.createServer(function (req, res) {
   req.chunks = [];
   req.on('data', function (chunk) {
+    console.log(chunk.toString());
     req.chunks.push(chunk.toString());
   });
 
@@ -28,5 +29,5 @@ server.listen(port);
 
 function ping() {
   this.res.writeHead(200);
-  this.res.end("Bot up.");
+  this.res.end("Hey, I'm Cool Guy.");
 }
