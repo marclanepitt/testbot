@@ -27,16 +27,14 @@ function searchGiphy(giphyToSearch) {
     accept: 'image/*'
   };
 
-  var callback = function(response) {
-    var str = '';
-
-    response.on('data', function(chunck){
-      str += chunck;
+  var callback = function(resp) {
+    resp.setEncoding('base64');
+    body = "data:" + resp.headers["content-type"] + ";base64,";
+    resp.on('data', (data) => { body += data});
+    resp.on('end', () => {
+        console.log(body);
+        //return res.json({result: body, status: 'success'});
     });
-
-    response.on('end', function() {
-    });
-    console.log(response)
 
   };
 
