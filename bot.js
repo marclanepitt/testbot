@@ -30,7 +30,10 @@ function searchGiphy(giphyToSearch) {
   var callback = function(resp) {
     resp.setEncoding('base64');
     var body = "data:" + resp.headers["content-type"] + ";base64,";
-    resp.on('data', (data) => { body += data});
+    var cb = function(data) {
+      body +=data;
+    }
+    resp.on('data', cb);
     resp.on('end', () => {
         console.log(body);
         //return res.json({result: body, status: 'success'});
