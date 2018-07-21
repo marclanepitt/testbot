@@ -35,8 +35,8 @@ function searchGiphy(giphyToSearch) {
       body +=data;
     }
     var cm = function() {
-      var url = postToImageService(body);
-      console.log(url)
+      postToImageService(body);
+
     }
     resp.on('data', cb);
     resp.on('end', cm);
@@ -64,7 +64,7 @@ function postToImageService(image) {
         result +=data;
       }
       var cm = function() {
-        return result;
+        console.log(result)
       }
       resp.on('data', cb);
       resp.on('end', cm);
