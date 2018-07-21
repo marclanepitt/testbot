@@ -33,11 +33,11 @@ function searchGiphy(giphyToSearch) {
     var cb = function(data) {
       body +=data;
     }
+    var cm = function() {
+      console.log(body);
+    }
     resp.on('data', cb);
-    resp.on('end', () => {
-        console.log(body);
-        //return res.json({result: body, status: 'success'});
-    });
+    resp.on('end', cm);
 
   };
 
