@@ -36,7 +36,6 @@ function searchGiphy(giphyToSearch) {
     var cm = function() {
       body = JSON.parse(body);
       var url = body.data[0].images.fixed_width.url;
-      console.log(url)
         var callback = function(resp) {
           resp.setEncoding('base64');
           var image = "data:" + resp.headers["content-type"] + ";base64,";
@@ -45,6 +44,7 @@ function searchGiphy(giphyToSearch) {
             image +=data;
           }
           var gm = function() {
+            console.log(image)
             postToImageService(image);
           }
           resp.on('data', gb);
