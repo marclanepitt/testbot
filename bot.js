@@ -29,7 +29,7 @@ function searchGiphy(giphyToSearch) {
 
   var callback = function(resp) {
     resp.setEncoding('base64');
-    body = "data:" + resp.headers["content-type"] + ";base64,";
+    var body = "data:" + resp.headers["content-type"] + ";base64,";
     resp.on('data', (data) => { body += data});
     resp.on('end', () => {
         console.log(body);
@@ -38,7 +38,7 @@ function searchGiphy(giphyToSearch) {
 
   };
 
-  HTTP.request(options, callback).end();
+  HTTPS.request(options, callback).end();
 }
 
 function encodeQuery(query) {
