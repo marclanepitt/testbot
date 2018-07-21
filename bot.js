@@ -36,7 +36,22 @@ function searchGiphy(giphyToSearch) {
       body +=data;
     }
     var cm = function() {
-      console.log(body)
+      var url = body.data[0].images.fixed_width.url;
+        var callback = function(resp) {
+          resp.setEncoding('base64');
+          var image = "data:" + resp.headers["content-type"] + ";base64,";
+          image ='';
+          var gb = function(data) {
+            image +=data;
+          }
+          var gm = function() {
+            postToImageService(image);
+          }
+          resp.on('data', gb);
+          resp.on('end', gm);
+      }
+
+      HTTPS.get(url, callback).end()
     }
     resp.on('data', cb);
     resp.on('end', cm);
