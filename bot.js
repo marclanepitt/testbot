@@ -3,6 +3,7 @@ var HTTP = require('http');
 
 var botID = process.env.BOT_ID;
 var apiKey = process.env.API_KEY;
+var gmKey = process.env.GM_KEY;
 
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
@@ -34,7 +35,8 @@ function searchGiphy(giphyToSearch) {
       body +=data;
     }
     var cm = function() {
-      console.log(body);
+      var url = postToImageService(body);
+      console.log(url)
     }
     resp.on('data', cb);
     resp.on('end', cm);
@@ -42,6 +44,34 @@ function searchGiphy(giphyToSearch) {
   };
 
   HTTPS.request(options, callback).end();
+}
+
+function postToImageService(image) {
+    var postOptions = {
+      host: 'image.groupme.com',
+      path: '/pictures',
+      headers : {
+        'X-Access-Token': gmKey,
+        'Content-Type': 'image/gif'
+      },
+      method: 'POST',
+      body: image
+    }
+
+    var callback = function(resp) {
+      result = '';
+      var cb = function(data) {
+        result +=data;
+      }
+      var cm = function() {
+        return result;
+      }
+      resp.on('data', cb);
+      resp.on('end', cm);
+
+    };
+
+    HTTPS.request(postOptions, callback).end();
 }
 
 function encodeQuery(query) {
