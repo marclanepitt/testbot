@@ -42,7 +42,7 @@ function searchGiphy(giphyToSearch) {
           resp.setEncoding('binary');
           var result = [ ];
           var gb = function(data) {
-            result.push(data);
+            result.push(Buffer(data,"binary"));
           }
           var gm = function() {
             console.log(result)
