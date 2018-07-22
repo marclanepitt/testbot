@@ -37,7 +37,8 @@ function searchGiphy(giphyToSearch) {
     }
     var cm = function() {
       body = JSON.parse(body);
-      var url = body.data[0].image_url;
+      var url = body.data[0].images.downsized.url;
+      postMessage(url)
         var callback = function(resp) {
           resp.setEncoding('binary');
           var result = [ ];
