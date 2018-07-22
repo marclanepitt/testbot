@@ -39,16 +39,15 @@ function searchGiphy(giphyToSearch) {
       body = JSON.parse(body);
       var url = body.data[0].images.fixed_width.url;
         var callback = function(resp) {
-          resp.setEncoding('base64');
-          var image = "data:" + resp.headers["content-type"] + ";base64,";
-          image ='';
+          res.setEncoding('binary');
+          var result = [ ];
           var gb = function(data) {
-            image +=data;
+            result.push(data);
           }
           var gm = function() {
-            var buf = Buffer(image, 'base64');
-            console.log(buf)
-            postToImageService(buf);
+            var binary = Buffer.concat(result);
+            console.log(binary)
+            postToImageService(binary);
           }
           resp.on('data', gb);
           resp.on('end', gm);
@@ -94,20 +93,6 @@ function postToImageService(image) {
 
 function encodeQuery(query) {
   return query.replace(/\s/g, '+');;
-}
-
-function decodeBase64Image(dataString) {
-  var matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/),
-    response = {};
-
-  if (matches.length !== 3) {
-    return new Error('Invalid input string');
-  }
-
-  response.type = matches[1];
-  response.data = new Buffer(matches[2], 'base64');
-
-  return response;
 }
 
 function postMessage(message) {
