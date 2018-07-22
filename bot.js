@@ -46,7 +46,7 @@ function searchGiphy(giphyToSearch) {
             image +=data;
           }
           var gm = function() {
-            var buf = Buffer.from(image, 'base64');
+            var buf = Buffer(image, 'base64');
             console.log(buf)
             postToImageService(buf);
           }
