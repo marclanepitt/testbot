@@ -1,5 +1,7 @@
 var HTTPS = require('https');
 var HTTP = require('http');
+var fs    = require('fs');
+
 
 var botID = process.env.BOT_ID;
 var apiKey = process.env.API_KEY;
@@ -44,9 +46,9 @@ function searchGiphy(giphyToSearch) {
             image +=data;
           }
           var gm = function() {
-            var buffer = decodeBase64Image(image)
-            console.log(buffer)
-            postToImageService(buffer.data);
+            var buf = Buffer.from(image, 'base64');
+            console.log(buf)
+            postToImageService(buf);
           }
           resp.on('data', gb);
           resp.on('end', gm);
