@@ -42,10 +42,10 @@ function searchGiphy(giphyToSearch) {
           resp.setEncoding('binary');
           var result = [ ];
           var gb = function(data) {
-            if (!data) return
             result.push(data);
           }
           var gm = function() {
+            console.log(result)
             var binary = Buffer.concat(result);
             console.log(binary)
             postToImageService(binary);
