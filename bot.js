@@ -38,23 +38,7 @@ function searchGiphy(giphyToSearch) {
     var cm = function() {
       body = JSON.parse(body);
       var url = body.data[0].images.downsized.url;
-      postMessage(url)
-        var callback = function(resp) {
-          resp.setEncoding('binary');
-          var result = [ ];
-          var gb = function(data) {
-            result.push(Buffer(data,"binary"));
-          }
-          var gm = function() {
-            var binary = Buffer.concat(result);
-            console.log(binary)
-            postToImageService(binary);
-          }
-          resp.on('data', gb);
-          resp.on('end', gm);
-      }
-
-      HTTPS.get(url, callback).end()
+      postMessage(url);
     }
     resp.on('data', cb);
     resp.on('end', cm);
