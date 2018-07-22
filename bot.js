@@ -37,7 +37,7 @@ function searchGiphy(giphyToSearch) {
     }
     var cm = function() {
       body = JSON.parse(body);
-      var url = body.data[0].images.fixed_width.url;
+      var url = body.data[0].image_url;
         var callback = function(resp) {
           resp.setEncoding('binary');
           var result = [ ];
@@ -45,7 +45,6 @@ function searchGiphy(giphyToSearch) {
             result.push(Buffer(data,"binary"));
           }
           var gm = function() {
-            console.log(result)
             var binary = Buffer.concat(result);
             console.log(binary)
             postToImageService(binary);
