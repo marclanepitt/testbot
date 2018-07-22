@@ -39,7 +39,7 @@ function searchGiphy(giphyToSearch) {
       body = JSON.parse(body);
       var url = body.data[0].images.fixed_width.url;
         var callback = function(resp) {
-          res.setEncoding('binary');
+          resp.setEncoding('binary');
           var result = [ ];
           var gb = function(data) {
             result.push(data);
