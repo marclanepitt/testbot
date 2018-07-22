@@ -8,19 +8,17 @@ var apiKey = process.env.API_KEY;
 var gmKey = process.env.GM_KEY;
 
 function respond() {
+  this.res.writeHead(200);
+
   var request = JSON.parse(this.req.chunks[0]),
       giphyCommand = '/giphy';
 
-  if(request.text &&
-     request.text.length > giphyCommand.length &&
-     request.text.substring(0, giphyCommand.length) === giphyCommand) {
-    this.res.writeHead(200);
-    searchGiphy(request.text.substring(giphyCommand.length + 1));
-    this.res.end();
-  } else {
-    this.res.writeHead(200);
-    this.res.end();
+  if(request.text) {
+    if(request.text.length > giphyCommand.length && request.text.substring(0, giphyCommand.length) === giphyCommand) {
+        searchGiphy(request.text.substring(giphyCommand.length + 1));
+    }
   }
+  this.res.end();
 }
 
 function searchGiphy(giphyToSearch) {
@@ -46,34 +44,6 @@ function searchGiphy(giphyToSearch) {
   };
 
   HTTPS.request(options, callback).end();
-}
-
-function postToImageService(image) {
-    var postOptions = {
-      host: 'image.groupme.com',
-      path: '/pictures',
-      headers : {
-        'X-Access-Token': gmKey,
-        'Content-Type': 'image/gif'
-      },
-      method: 'POST',
-      body: image
-    }
-
-    var callback = function(resp) {
-      result = '';
-      var cb = function(data) {
-        result +=data;
-      }
-      var cm = function() {
-        console.log(result)
-      }
-      resp.on('data', cb);
-      resp.on('end', cm);
-
-    };
-
-    HTTPS.request(postOptions, callback).end();
 }
 
 function encodeQuery(query) {
