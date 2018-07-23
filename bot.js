@@ -11,12 +11,12 @@ function respond() {
 
   var request = JSON.parse(this.req.chunks[0]),
       giphyCommand = '/giphy';
-
+    this.res.writeHead(200);
     if(request.text && request.text.length > giphyCommand.length && request.text.substring(0, giphyCommand.length) === giphyCommand) {
-        this.res.writeHead(200);
         searchGiphy(request.text.substring(giphyCommand.length + 1));
-        this.res.end();
     }
+    this.res.end();
+
 }
 
 function searchGiphy(giphyToSearch) {
@@ -34,7 +34,7 @@ function searchGiphy(giphyToSearch) {
     var cm = function() {
       body = JSON.parse(body);
       var url = body.data[0].images.downsized.url;
-      postMessage("hi");
+      postMessage("here ya go",url);
     }
     resp.on('data', cb);
     resp.on('end', cm);
@@ -48,7 +48,7 @@ function encodeQuery(query) {
   return query.replace(/\s/g, '+');;
 }
 
-function postMessage(message) {
+function postMessage(message, image_url) {
   var botResponse, options, body, botReq;
 
   botResponse = message;
@@ -61,7 +61,13 @@ function postMessage(message) {
 
   body = {
     "bot_id" : botID,
-    "text" : botResponse
+    "text" : botResponse,
+    "attachments" : [
+      {
+        "type"  : "image",
+        "url"   : image_url
+       }
+   ]
   };
 
   console.log('sending ' + botResponse + ' to ' + botID);
@@ -70,6 +76,7 @@ function postMessage(message) {
       if(res.statusCode == 202) {
         console.log('202 response');
       } else {
+        console.log(res);
         console.log('rejecting bad status code from groupme:' + res.statusCode);
       }
   });
