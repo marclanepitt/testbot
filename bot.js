@@ -18,6 +18,7 @@ function respond() {
       insultCommand = '/insult',
       loveCommand = '/love';
       quoteCommand = '/quote';
+      urbanCommand = '/urban';
 
     this.res.writeHead(200);
     if(request.text && request.text.length > giphyCommand.length && request.text.substring(0, giphyCommand.length) === giphyCommand && request.name !== "Test Guy" && request.name !== "Scum Guy") {
@@ -49,9 +50,16 @@ function respond() {
       sendLove(names);
     }
 
+    if(request.text && request.text.length > urbanCommand.length && request.text.substring(0, urbanCommand.length) === urbanCommand) {
+      var term = request.text.substring(decideCommand.length + 1);
+      urbanDictionary(term);
+    }
+
     if(request.text === quoteCommand) {
       sendMotivation();
     }
+
+    if(request.te)
 
     if(request.text === "/help") {
       postMessage(`/giphy <search term> - Looks up a gif with the search term \r\n
@@ -59,6 +67,7 @@ function respond() {
 /insult <name> - insults <name> \r\n
 /love <name1> , <name2> calculates love percentage of the two names \r\n
 /quote - returns a random quote \r\n
+/urban <term> - returns urban dictionary definition of term \r\n
 <name>++ - Increases name's scum levels \r\n
 <name>-- - Decreases name's scum levels`)
     }
@@ -163,6 +172,33 @@ function sendMotivation() {
     var cm = function() {
       body = JSON.parse(body);
       postMessage(body[0].quote);
+    }
+    resp.on('data', cb);
+    resp.on('end', cm);
+
+  };
+
+  HTTPS.request(options, callback).end();
+}
+
+function urbanDictionary(term) {
+  var options = {
+    host: 'mashape-community-urban-dictionary.p.mashape.com',
+    path: '/define?term='+term,
+    accept: 'application/json',
+    headers: {
+      'X-Mashape-Key': mashapeKey
+    }
+  };
+
+  var callback = function(resp) {
+    body ='';
+    var cb = function(data) {
+      body +=data;
+    }
+    var cm = function() {
+      body = JSON.parse(body);
+      postMessage(body.list[0].definition);
     }
     resp.on('data', cb);
     resp.on('end', cm);
