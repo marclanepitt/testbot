@@ -12,7 +12,7 @@
     "pg": "^7.4.3"
   },
   "engines": {
-    "node": "0.12.7"
+    "node": "8.11.3"
   },
   "repository": {
     "type": "git",
