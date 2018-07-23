@@ -17,7 +17,7 @@ function respond() {
     }
     if(request.text && (request.text.match(/\+/g) || []).length == 2) {
       var user = request.name;
-      var scum = request.text.replace(/\++/,"");
+      var scum = request.text.replace(/\+/g,"");
       if(user.indexOf(scum) !== -1) {
         postMessage("Nice try");
       } else {
