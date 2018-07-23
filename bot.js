@@ -120,14 +120,23 @@ function sendLove(names) {
   };
 
   var callback = function(resp) {
-    console.log(resp)
+    body ='';
+    var cb = function(data) {
+      body +=data;
+    }
+    var cm = function() {
+      console.log(body)
       // postMessage(`Results \n
       // `+names[0]+` + `+names[1]+` \n
       // ------------------------- \n
-      // Match = `+ resp.percentage +`% \n
-      // `+ resp.result +`
+      // Match = `+ body.percentage +`% \n
+      // `+ body.result +`
 
       // `);
+    }
+    resp.on('data', cb);
+    resp.on('end', cm);
+
   };
 
   HTTPS.request(options, callback).end();
