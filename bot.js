@@ -16,14 +16,14 @@ function respond() {
         searchGiphy(request.text.substring(giphyCommand.length + 1));
     }
     if(request.text && (/+[^\+]\+\+/).test(request.text)) {
-      let user = request.name;
-      let scum = request.text.replace(/\++/,"");
+      var user = request.name;
+      var scum = request.text.replace(/\++/,"");
       if(user.indexOf(scum !== -1)) {
         postMessage("Nice try");
       } else {
           //insert into table
           //get resulting totals
-          let result = 0
+          var result = 0
           postMessage("Scum levels: " + scum + " " + result);
       };
     }
