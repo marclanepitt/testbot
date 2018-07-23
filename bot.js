@@ -112,7 +112,7 @@ function sendInsult(name) {
 function sendLove(names) {
   var options = {
     host: 'love-calculator.p.mashape.com',
-    path: '/getPercentage?fname='+names[0]+'&sname='+names[1]+'"',
+    path: '/getPercentage?fname='+encodeQuery(names[0])+'&sname='+encodeQuery(names[1]),
     accept: 'application/json',
     headers: {
       'X-Mashape-Key': mashapeKey
