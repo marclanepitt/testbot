@@ -126,11 +126,13 @@ function sendLove(names) {
     }
     var cm = function() {
       body = JSON.parse(body);
-      postMessage(`Results \r\n
+      var response = `Results \r\n
       `+names[0]+` + `+names[1]+` \r\n
       ------------------------- \r\n
       Match = `+ body.percentage +`% \r\n
-      `+ body.result);
+      `+ body.result;
+      console.log(response)
+      postMessage("bpp");
     }
     resp.on('data', cb);
     resp.on('end', cm);
