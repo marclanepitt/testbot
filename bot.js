@@ -149,7 +149,7 @@ function sendLove(names) {
 function sendMotivation() {
   var options = {
     host: 'andruxnet-random-famous-quotes.p.mashape.com',
-    path: '/?cat=famous&count=1',
+    path: '?cat=famous&count=1',
     accept: 'application/json',
     headers: {
       'X-Mashape-Key': mashapeKey
