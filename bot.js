@@ -70,7 +70,7 @@ function respond() {
       postMessage("I choose "+ decideList[Math.floor(Math.random()*decideList.length)]);
     }
 
-    if(request.text && request.text.length > insult.length && request.text.substring(0, insultCommand.length) === insultCommand) {
+    if(request.text && request.text.length > insultCommand.length && request.text.substring(0, insultCommand.length) === insultCommand) {
       var name = request.text.substring(decideCommand.length + 1);
       sendInsult(name);
     }
