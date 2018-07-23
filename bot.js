@@ -126,8 +126,9 @@ function sendLove(names) {
     }
     var cm = function() {
       body = JSON.parse(body);
-      var response = ""+body.percentage
+      var response = body.percentage+"%"
       postMessage(response);
+      postMessage("" + body.response)
     }
     resp.on('data', cb);
     resp.on('end', cm);
