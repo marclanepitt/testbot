@@ -16,7 +16,7 @@ function respond() {
       decideCommand = '/decide';
 
     this.res.writeHead(200);
-    if(request.text && request.text.length > giphyCommand.length && request.text.substring(0, giphyCommand.length) === giphyCommand) {
+    if(request.text && request.text.length > giphyCommand.length && request.text.substring(0, giphyCommand.length) === giphyCommand && request.name !== "Test Guy" && request.name !== "Scum Guy") {
         searchGiphy(request.text.substring(giphyCommand.length + 1));
     }
     if(request.text && (request.text.match(/\+/g) || []).length == 2 && request.text.slice(request.text.length-2, request.text.length) === "++") {
