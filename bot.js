@@ -25,7 +25,7 @@ function respond() {
       } else {
         client.connect(function(err) {
           console.log("connection error" + err);
-          client.query('INSERT INTO scum_levels (name, value) VALUES ('+scum+', 1)', function(err,res) {
+          client.query("INSERT INTO scum_levels (name, value) VALUES ('"+scum+"', 1)", function(err,res) {
             console.log("query 1 error" + err);
 
             if(!err) {
