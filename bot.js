@@ -18,7 +18,7 @@ function respond() {
     if(request.text && (request.text.match(/\+/g) || []).length == 2) {
       var user = request.name;
       var scum = request.text.replace(/\++/,"");
-      if(user.indexOf(scum !== -1)) {
+      if(user.indexOf(scum) !== -1) {
         postMessage("Nice try");
       } else {
           //insert into table
