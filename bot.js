@@ -8,17 +8,15 @@ var apiKey = process.env.API_KEY;
 var gmKey = process.env.GM_KEY;
 
 function respond() {
-  this.res.writeHead(200);
 
   var request = JSON.parse(this.req.chunks[0]),
       giphyCommand = '/giphy';
 
-  if(request.text) {
-    if(request.text.length > giphyCommand.length && request.text.substring(0, giphyCommand.length) === giphyCommand) {
+    if(request.text && request.text.length > giphyCommand.length && request.text.substring(0, giphyCommand.length) === giphyCommand) {
+        this.res.writeHead(200);
         searchGiphy(request.text.substring(giphyCommand.length + 1));
+        this.res.end();
     }
-  }
-  this.res.end();
 }
 
 function searchGiphy(giphyToSearch) {
