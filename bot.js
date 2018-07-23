@@ -6,8 +6,11 @@ var fs    = require('fs');
 var botID = process.env.BOT_ID;
 var apiKey = process.env.API_KEY;
 var gmKey = process.env.GM_KEY;
-var client = new Client();
-await client.connect();
+
+const { Pool } = require('pg')
+
+const pool = new Pool()
+
 
 function respond() {
 
@@ -23,9 +26,9 @@ function respond() {
       if(user.toLowerCase().indexOf(scum.toLowerCase()) !== -1) {
         postMessage("Nice try");
       } else {
-          client.query('INSERT INTO scum_levels (name, value) VALUES ('+scum+', 1)', (err,res) => {
+          pool.query('INSERT INTO scum_levels (name, value) VALUES ('+scum+', 1)', (err,res) => {
             if(!err) {
-              client.query("SELECT sum(value) as total FROM scum_levels WHERE name is '"+scum+"'", (err,res) => {
+              pool.query("SELECT sum(value) as total FROM scum_levels WHERE name is '"+scum+"'", (err,res) => {
                 postMessage("Scum levels: " + scum + " " + res.rows[0]['total']);
               });
             }
