@@ -120,6 +120,7 @@ function sendLove(names) {
   };
 
   var callback = function(resp) {
+    console.log(resp)
       postMessage(`Results \n
       `+names[0]+` + `+names[1]+` \n
       ------------------------- \n
