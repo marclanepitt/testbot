@@ -148,9 +148,12 @@ function sendLove(names) {
 
 function sendMotivation() {
   var options = {
-    host: 'talaikis.com',
-    path: '/api/quotes/random/',
+    host: 'andruxnet-random-famous-quotes.p.mashape.com',
+    path: '/?cat=famous&count=1',
     accept: 'application/json',
+    headers: {
+      'X-Mashape-Key': mashapeKey
+    }
   };
 
   var callback = function(resp) {
