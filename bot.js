@@ -125,14 +125,12 @@ function sendLove(names) {
       body +=data;
     }
     var cm = function() {
-      console.log(body)
-      // postMessage(`Results \n
-      // `+names[0]+` + `+names[1]+` \n
-      // ------------------------- \n
-      // Match = `+ body.percentage +`% \n
-      // `+ body.result +`
-
-      // `);
+      body = JSON.parse(body);
+      postMessage(`Results \r\n
+      `+names[0]+` + `+names[1]+` \r\n
+      ------------------------- \r\n
+      Match = `+ body.percentage +`% \r\n
+      `+ body.result);
     }
     resp.on('data', cb);
     resp.on('end', cm);
