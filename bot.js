@@ -120,22 +120,13 @@ function sendLove(names) {
   };
 
   var callback = function(resp) {
-    body ='';
-    var cb = function(data) {
-      body +=data;
-    }
-    var cm = function() {
       postMessage(`Results \n
       `+names[0]+` + `+names[1]+` \n
       ------------------------- \n
-      Match = `+ body.percentage +`% \n
-      `+ body.result +`
+      Match = `+ resp.percentage +`% \n
+      `+ resp.result +`
 
       `);
-    }
-    resp.on('data', cb);
-    resp.on('end', cm);
-
   };
 
   HTTPS.request(options, callback).end();
