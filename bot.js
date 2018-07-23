@@ -161,9 +161,8 @@ function sendMotivation() {
       body +=data;
     }
     var cm = function() {
-      console.log(body)
       body = JSON.parse(body);
-      postMessage(body.quote);
+      postMessage(body[0].quote);
     }
     resp.on('data', cb);
     resp.on('end', cm);
