@@ -15,10 +15,10 @@ function respond() {
     if(request.text && request.text.length > giphyCommand.length && request.text.substring(0, giphyCommand.length) === giphyCommand) {
         searchGiphy(request.text.substring(giphyCommand.length + 1));
     }
-    if(request.text && (request.text.match(/\+/g) || []).length == 2) {
+    if(request.text && (request.text.match(/\+/g) || []).length == 2 && request.text.slice(request.text.length-2, request.text.length) === "++") {
       var user = request.name;
       var scum = request.text.replace(/\+/g,"");
-      if(user.indexOf(scum) !== -1) {
+      if(user.toLowerCase().indexOf(scum.toLowerCase()) !== -1) {
         postMessage("Nice try");
       } else {
           //insert into table
