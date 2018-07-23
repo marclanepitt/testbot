@@ -6,15 +6,17 @@ var fs    = require('fs');
 var botID = process.env.BOT_ID;
 var apiKey = process.env.API_KEY;
 var gmKey = process.env.GM_KEY;
+var mashapeKey = process.env.X_MASHAPE_KEY;
 const { Client, Pool } = require('pg');
 const client = new Client();
 
 function respond() {
 
   var request = JSON.parse(this.req.chunks[0]),
-      giphyCommand = '/giphy';
-      decideCommand = '/decide';
-      insultCommand = '/insult';
+      giphyCommand = '/giphy',
+      decideCommand = '/decide',
+      insultCommand = '/insult',
+      loveCommand = '/love';
 
     this.res.writeHead(200);
     if(request.text && request.text.length > giphyCommand.length && request.text.substring(0, giphyCommand.length) === giphyCommand && request.name !== "Test Guy" && request.name !== "Scum Guy") {
@@ -40,10 +42,17 @@ function respond() {
       sendInsult(name);
     }
 
+    if(request.text && request.text.length > loveCommand.length && request.text.substring(0, loveCommand.length) === loveCommand) {
+      var nameString = request.text.substring(loveCommand.length + 1);
+      var names = nameString.split(",");
+      sendLove(names);
+    }
+
     if(request.text === "/help") {
       postMessage(`/giphy <search term> - Looks up a gif with the search term \r\n
                    /decide comma, seperated, list, of, choices - returns one of the choices randomly \r\n
                    /insult <name> - insults <name> \r\n
+                   /love <name1> , <name2> calculates love percentage of the two names
                    <name>++ - Increases name's scum levels \r\n
                    <name>-- - Decreases name's scum levels`)
     }
@@ -91,6 +100,38 @@ function sendInsult(name) {
     }
     var cm = function() {
       postMessage(body);
+    }
+    resp.on('data', cb);
+    resp.on('end', cm);
+
+  };
+
+  HTTPS.request(options, callback).end();
+}
+
+function sendLove(names) {
+  var options = {
+    host: 'love-calculator.p.mashape.com',
+    path: '/getPercentage?fname='+names[0]+'&sname='+names[1]+'"',
+    accept: 'application/json',
+    headers: {
+      'X-Mashape-Key': mashapeKey
+    }
+  };
+
+  var callback = function(resp) {
+    body ='';
+    var cb = function(data) {
+      body +=data;
+    }
+    var cm = function() {
+      postMessage(`Results \n
+      `+names[0]+` + `+names[1]+` \n
+      ------------------------- \n
+      Match = `+ body.percentage +`% \n
+      `+ body.result +`
+
+      `);
     }
     resp.on('data', cb);
     resp.on('end', cm);
