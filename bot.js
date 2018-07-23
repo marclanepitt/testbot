@@ -14,6 +14,7 @@ function respond() {
   var request = JSON.parse(this.req.chunks[0]),
       giphyCommand = '/giphy';
       decideCommand = '/decide';
+      insultCommand = '/insult';
 
     this.res.writeHead(200);
     if(request.text && request.text.length > giphyCommand.length && request.text.substring(0, giphyCommand.length) === giphyCommand && request.name !== "Test Guy" && request.name !== "Scum Guy") {
@@ -69,9 +70,15 @@ function respond() {
       postMessage("I choose "+ decideList[Math.floor(Math.random()*decideList.length)]);
     }
 
+    if(request.text && request.text.length > insult.length && request.text.substring(0, insultCommand.length) === insultCommand) {
+      var name = request.text.substring(decideCommand.length + 1);
+      sendInsult(name);
+    }
+
     if(request.text === "/help") {
       postMessage(`/giphy <search term> - Looks up a gif with the search term \r\n
                    /decide comma, seperated, list, of, choices - returns one of the choices randomly \r\n
+                   /insult <name> - insults <name> \r\n
                    <name>++ - Increases name's scum levels \r\n
                    <name>-- - Decreases name's scum levels`)
     }
@@ -96,6 +103,29 @@ function searchGiphy(giphyToSearch) {
       body = JSON.parse(body);
       var url = body.data.images.downsized.url;
       postMessage(url,"");
+    }
+    resp.on('data', cb);
+    resp.on('end', cm);
+
+  };
+
+  HTTPS.request(options, callback).end();
+}
+
+function sendInsult(name) {
+  var options = {
+    host: 'insult.mattbas.org',
+    path: '/api/insult?who=' + encodeQuery(name),
+    accept: '/*'
+  };
+
+  var callback = function(resp) {
+    body ='';
+    var cb = function(data) {
+      body +=data;
+    }
+    var cm = function() {
+      postMessage(body);
     }
     resp.on('data', cb);
     resp.on('end', cm);
