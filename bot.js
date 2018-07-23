@@ -49,7 +49,7 @@ function respond() {
       sendLove(names);
     }
 
-    if(request.text = motivateCommand) {
+    if(request.text === motivateCommand) {
       sendMotivation();
     }
 
