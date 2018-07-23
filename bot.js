@@ -15,6 +15,18 @@ function respond() {
     if(request.text && request.text.length > giphyCommand.length && request.text.substring(0, giphyCommand.length) === giphyCommand) {
         searchGiphy(request.text.substring(giphyCommand.length + 1));
     }
+    if(request.text && (/+[^\+]\+\+/).test(request.text)) {
+      let user = request.name;
+      let scum = request.text.replace(/\++/,"");
+      if(user.indexOf(scum !== -1)) {
+        postMessage("Nice try");
+      } else {
+          //insert into table
+          //get resulting totals
+          let result = 0
+          postMessage("Scum levels: " + scum + " " + result);
+      };
+    }
     this.res.end();
 
 }
