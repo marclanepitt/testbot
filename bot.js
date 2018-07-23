@@ -69,6 +69,13 @@ function respond() {
       postMessage("I choose "+ decideList[Math.floor(Math.random()*decideList.length)]);
     }
 
+    if(request.text === "/help") {
+      postMessage(`/giphy <search term> - Looks up a gif with the search term \r\n
+                   /decide comma, seperated, list, of, choices - returns one of the choices randomly \r\n
+                   <name>++ - Increases name's scum levels \r\n
+                   <name>-- - Decreases name's scum levels`)
+    }
+
     this.res.end();
 
 }
