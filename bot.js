@@ -6,6 +6,8 @@ var fs    = require('fs');
 var botID = process.env.BOT_ID;
 var apiKey = process.env.API_KEY;
 var gmKey = process.env.GM_KEY;
+var client = new Client();
+await client.connect();
 
 function respond() {
 
@@ -21,10 +23,10 @@ function respond() {
       if(user.toLowerCase().indexOf(scum.toLowerCase()) !== -1) {
         postMessage("Nice try");
       } else {
-          //insert into table
-          //get resulting totals
-          var result = 0
-          postMessage("Scum levels: " + scum + " " + result);
+          await client.query('INSERT INTO scum_levels (name, value) VALUES ('+scum+', 1)');
+          var result = await client.query("SELECT sum(value) as total FROM scum_levels WHERE name is '"+scum+"'");
+          await client.end();
+          postMessage("Scum levels: " + scum + " " + result[0]['total']);
       };
     }
     this.res.end();
