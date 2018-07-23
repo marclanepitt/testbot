@@ -38,6 +38,26 @@ function respond() {
         });
       };
     }
+    if(request.text && (request.text.match(/\-/g) || []).length == 2 && request.text.slice(request.text.length-2, request.text.length) === "--") {
+      var user = request.name;
+      var scum = request.text.replace(/\-/g,"");
+      if(user.toLowerCase().indexOf(scum.toLowerCase()) !== -1) {
+        postMessage("Nice try");
+      } else {
+        client.connect(function(err) {
+          console.log("connection error" + err);
+          client.query("INSERT INTO scum_levels (name, value) VALUES ('"+scum+"', -1)", function(err,res) {
+            console.log("query 1 error" + err);
+            if(!err) {
+              client.query("SELECT sum(value) as total FROM scum_levels WHERE name = '"+scum+"'", function(err,res) {
+                console.log("query 2 error" + err);
+                postMessage("Scum levels: " + scum + " " + res.rows[0]['total']);
+              });
+            }
+          });
+        });
+      };
+    }
     this.res.end();
 
 }
