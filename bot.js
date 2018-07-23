@@ -34,7 +34,7 @@ function searchGiphy(giphyToSearch) {
     var cm = function() {
       body = JSON.parse(body);
       var url = body.data[0].images.downsized.url;
-      postMessage("here ya go",url);
+      postMessage(url,"");
     }
     resp.on('data', cb);
     resp.on('end', cm);
