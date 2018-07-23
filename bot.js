@@ -126,8 +126,11 @@ function sendLove(names) {
     }
     var cm = function() {
       body = JSON.parse(body);
-      var response = body.percentage+" percent compatibility"
-      postMessage(""+response + ": " + body.result);
+      postMessage(`Results \r\n
+      `+names[0]+` + `+names[1]+` \r\n
+      ------------------------- \r\n
+      Match = `+ body.percentage +` percent \r\n
+      `+ body.result);
     }
     resp.on('data', cb);
     resp.on('end', cm);
