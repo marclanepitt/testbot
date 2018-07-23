@@ -148,8 +148,7 @@ function sendLove(names) {
 
 function sendMotivation() {
   var options = {
-    host: 'andruxnet-random-famous-quotes.p.mashape.com',
-    path: '?cat=famous&count=1',
+    host: 'andruxnet-random-famous-quotes.p.mashape.com/?cat=famous&count=1',
     accept: 'application/json',
     headers: {
       'X-Mashape-Key': mashapeKey
@@ -162,6 +161,7 @@ function sendMotivation() {
       body +=data;
     }
     var cm = function() {
+      console.log(body)
       body = JSON.parse(body);
       postMessage(body.quote);
     }
