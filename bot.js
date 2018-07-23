@@ -17,7 +17,7 @@ function respond() {
       decideCommand = '/decide',
       insultCommand = '/insult',
       loveCommand = '/love';
-      motivateCommand = '/motivate';
+      quoteCommand = '/quote';
 
     this.res.writeHead(200);
     if(request.text && request.text.length > giphyCommand.length && request.text.substring(0, giphyCommand.length) === giphyCommand && request.name !== "Test Guy" && request.name !== "Scum Guy") {
@@ -49,7 +49,7 @@ function respond() {
       sendLove(names);
     }
 
-    if(request.text === motivateCommand) {
+    if(request.text === quoteCommand) {
       sendMotivation();
     }
 
@@ -58,7 +58,7 @@ function respond() {
 /decide comma, seperated, list, of, choices - returns one of the choices randomly \r\n
 /insult <name> - insults <name> \r\n
 /love <name1> , <name2> calculates love percentage of the two names \r\n
-/motivate - returns a random quote \r\n
+/quote - returns a random quote \r\n
 <name>++ - Increases name's scum levels \r\n
 <name>-- - Decreases name's scum levels`)
     }
