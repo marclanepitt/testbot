@@ -126,7 +126,7 @@ function sendLove(names) {
     }
     var cm = function() {
       body = JSON.parse(body);
-      var response = body.percentage+"% compatibility"
+      var response = body.percentage+" percent compatibility"
       postMessage(""+response + ": " + body.result);
     }
     resp.on('data', cb);
