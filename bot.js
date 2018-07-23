@@ -121,13 +121,13 @@ function sendLove(names) {
 
   var callback = function(resp) {
     console.log(resp)
-      postMessage(`Results \n
-      `+names[0]+` + `+names[1]+` \n
-      ------------------------- \n
-      Match = `+ resp.percentage +`% \n
-      `+ resp.result +`
+      // postMessage(`Results \n
+      // `+names[0]+` + `+names[1]+` \n
+      // ------------------------- \n
+      // Match = `+ resp.percentage +`% \n
+      // `+ resp.result +`
 
-      `);
+      // `);
   };
 
   HTTPS.request(options, callback).end();
