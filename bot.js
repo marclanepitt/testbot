@@ -8,7 +8,6 @@ var apiKey = process.env.API_KEY;
 var gmKey = process.env.GM_KEY;
 var client = require('pg');
 var client = new Client();
-await client.connect();
 
 function respond() {
 
@@ -24,13 +23,15 @@ function respond() {
       if(user.toLowerCase().indexOf(scum.toLowerCase()) !== -1) {
         postMessage("Nice try");
       } else {
-          client.query('INSERT INTO scum_levels (name, value) VALUES ('+scum+', 1)', (err,res) => {
+        client.connect(function(err) {
+          client.query('INSERT INTO scum_levels (name, value) VALUES ('+scum+', 1)', function(err,res) {
             if(!err) {
-              client.query("SELECT sum(value) as total FROM scum_levels WHERE name is '"+scum+"'", (err,res) => {
+              client.query("SELECT sum(value) as total FROM scum_levels WHERE name is '"+scum+"'", function(err,res) {
                 postMessage("Scum levels: " + scum + " " + res.rows[0]['total']);
               });
             }
           });
+        });
       };
     }
     this.res.end();
