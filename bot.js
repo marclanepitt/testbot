@@ -21,45 +21,10 @@ function respond() {
         searchGiphy(request.text.substring(giphyCommand.length + 1));
     }
     if(request.text && (request.text.match(/\+/g) || []).length == 2 && request.text.slice(request.text.length-2, request.text.length) === "++") {
-      var user = request.name;
-      var scum = request.text.replace(/\+/g,"");
-      if(user.toLowerCase().indexOf(scum.toLowerCase()) !== -1) {
-        postMessage("Nice try");
-      } else {
-        client.connect(function(err) {
-          console.log("connection error" + err);
-          client.query("INSERT INTO scum_levels (name, value) VALUES ('"+scum+"', 1)", function(err,res) {
-            console.log("query 1 error" + err);
-
-            if(!err) {
-              client.query("SELECT sum(value) as total FROM scum_levels WHERE name = '"+scum+"'", function(err,res) {
-                console.log("query 2 error" + err);
-                postMessage("Scum levels: " + scum + " " + res.rows[0]['total']);
-              });
-            }
-          });
-        });
-      };
+      updateScumLevels(request, 1);
     }
     if(request.text && (request.text.match(/\-/g) || []).length == 2 && request.text.slice(request.text.length-2, request.text.length) === "--") {
-      var user = request.name;
-      var scum = request.text.replace(/\-/g,"");
-      if(user.toLowerCase().indexOf(scum.toLowerCase()) !== -1) {
-        postMessage("Nice try");
-      } else {
-        client.connect(function(err) {
-          console.log("connection error" + err);
-          client.query("INSERT INTO scum_levels (name, value) VALUES ('"+scum+"', -1)", function(err,res) {
-            console.log("query 1 error" + err);
-            if(!err) {
-              client.query("SELECT sum(value) as total FROM scum_levels WHERE name = '"+scum+"'", function(err,res) {
-                console.log("query 2 error" + err);
-                postMessage("Scum levels: " + scum + " " + res.rows[0]['total']);
-              });
-            }
-          });
-        });
-      };
+      updateScumLevels(request, -1);
     }
 
     if(request.text && request.text.length > decideCommand.length && request.text.substring(0, decideCommand.length) === decideCommand) {
@@ -133,6 +98,32 @@ function sendInsult(name) {
   };
 
   HTTPS.request(options, callback).end();
+}
+
+function updateScumLevels(request, value) {
+  var user = request.name;
+  if(value > 0) {
+    var scum = request.text.replace(/\+/g,"");
+  } else {
+    var scum = request.text.replace(/\-/g,"");
+  }
+  if(user.toLowerCase().indexOf(scum.toLowerCase()) !== -1) {
+    postMessage("Nice try");
+  } else {
+    client.connect(function(err) {
+      console.log("connection error" + err);
+      client.query("INSERT INTO scum_levels (name, value) VALUES ('"+scum+"', " +value+ ")", function(err,res) {
+        console.log("query 1 error" + err);
+
+        if(!err) {
+          client.query("SELECT sum(value) as total FROM scum_levels WHERE name = '"+scum+"'", function(err,res) {
+            console.log("query 2 error" + err);
+            postMessage("Scum levels: " + scum + " " + res.rows[0]['total']);
+          });
+        }
+      });
+    });
+  };
 }
 
 function encodeQuery(query) {
