@@ -6,7 +6,7 @@ var fs    = require('fs');
 var botID = process.env.BOT_ID;
 var apiKey = process.env.API_KEY;
 var gmKey = process.env.GM_KEY;
-const { Client } = require('pg');
+const { Client, Pool } = require('pg');
 const client = new Client();
 
 function respond() {
