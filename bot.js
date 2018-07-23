@@ -7,7 +7,7 @@ var botID = process.env.BOT_ID;
 var apiKey = process.env.API_KEY;
 var gmKey = process.env.GM_KEY;
 
-const { Pool } = require('pg')
+var Pool = require('pg')
 
 const pool = new Pool()
 
