@@ -17,6 +17,7 @@ function respond() {
       decideCommand = '/decide',
       insultCommand = '/insult',
       loveCommand = '/love';
+      motivateCommand = '/motivate';
 
     this.res.writeHead(200);
     if(request.text && request.text.length > giphyCommand.length && request.text.substring(0, giphyCommand.length) === giphyCommand && request.name !== "Test Guy" && request.name !== "Scum Guy") {
@@ -48,13 +49,18 @@ function respond() {
       sendLove(names);
     }
 
+    if(request.text = motivateCommand) {
+      sendMotivation();
+    }
+
     if(request.text === "/help") {
       postMessage(`/giphy <search term> - Looks up a gif with the search term \r\n
-                   /decide comma, seperated, list, of, choices - returns one of the choices randomly \r\n
-                   /insult <name> - insults <name> \r\n
-                   /love <name1> , <name2> calculates love percentage of the two names \r\n
-                   <name>++ - Increases name's scum levels \r\n
-                   <name>-- - Decreases name's scum levels`)
+/decide comma, seperated, list, of, choices - returns one of the choices randomly \r\n
+/insult <name> - insults <name> \r\n
+/love <name1> , <name2> calculates love percentage of the two names \r\n
+/motivate - returns a random quote \r\n
+<name>++ - Increases name's scum levels \r\n
+<name>-- - Decreases name's scum levels`)
     }
 
     this.res.end();
@@ -131,6 +137,30 @@ function sendLove(names) {
       ------------------------- \r\n
       Match = `+ body.percentage +` percent \r\n
       `+ body.result);
+    }
+    resp.on('data', cb);
+    resp.on('end', cm);
+
+  };
+
+  HTTPS.request(options, callback).end();
+}
+
+function sendMotivation() {
+  var options = {
+    host: 'talaikis.com',
+    path: '/api/quotes/random/',
+    accept: 'application/json',
+  };
+
+  var callback = function(resp) {
+    body ='';
+    var cb = function(data) {
+      body +=data;
+    }
+    var cm = function() {
+      body = JSON.parse(body);
+      postMessage(body.quote);
     }
     resp.on('data', cb);
     resp.on('end', cm);
