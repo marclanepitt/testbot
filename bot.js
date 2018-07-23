@@ -15,7 +15,7 @@ function respond() {
     if(request.text && request.text.length > giphyCommand.length && request.text.substring(0, giphyCommand.length) === giphyCommand) {
         searchGiphy(request.text.substring(giphyCommand.length + 1));
     }
-    if(request.text && (/+[^\+]\+\+/).test(request.text)) {
+    if(request.text && (request.text.match(/\+/g) || []).length == 2) {
       var user = request.name;
       var scum = request.text.replace(/\++/,"");
       if(user.indexOf(scum !== -1)) {
