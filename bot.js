@@ -126,7 +126,7 @@ function sendLove(names) {
     }
     var cm = function() {
       body = JSON.parse(body);
-      var response = "Results \r\n "+names[0]+" + "+names[1]+" \r\n ------------------------- \r\n Match = "+ body.percentage +"% \n "+ body.result;
+      var response = ""+body.percentage
       postMessage(response);
     }
     resp.on('data', cb);
