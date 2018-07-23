@@ -52,7 +52,7 @@ function respond() {
       postMessage(`/giphy <search term> - Looks up a gif with the search term \r\n
                    /decide comma, seperated, list, of, choices - returns one of the choices randomly \r\n
                    /insult <name> - insults <name> \r\n
-                   /love <name1> , <name2> calculates love percentage of the two names
+                   /love <name1> , <name2> calculates love percentage of the two names \r\n
                    <name>++ - Increases name's scum levels \r\n
                    <name>-- - Decreases name's scum levels`)
     }
