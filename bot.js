@@ -6,8 +6,8 @@ var fs    = require('fs');
 var botID = process.env.BOT_ID;
 var apiKey = process.env.API_KEY;
 var gmKey = process.env.GM_KEY;
-var client = require('pg');
-var client = new Client();
+const { Client } = require('pg');
+const client = new Client();
 
 function respond() {
 
