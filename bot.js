@@ -59,8 +59,6 @@ function respond() {
       sendMotivation();
     }
 
-    if(request.te)
-
     if(request.text === "/help") {
       postMessage(`/giphy <search term> - Looks up a gif with the search term \r\n
 /decide comma, seperated, list, of, choices - returns one of the choices randomly \r\n
