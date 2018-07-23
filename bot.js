@@ -131,8 +131,7 @@ function sendLove(names) {
       ------------------------- \r\n
       Match = `+ body.percentage +`% \r\n
       `+ body.result;
-      console.log(response)
-      postMessage("bpp");
+      postMessage(response);
     }
     resp.on('data', cb);
     resp.on('end', cm);
