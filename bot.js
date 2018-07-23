@@ -23,10 +23,13 @@ function respond() {
       if(user.toLowerCase().indexOf(scum.toLowerCase()) !== -1) {
         postMessage("Nice try");
       } else {
-          await client.query('INSERT INTO scum_levels (name, value) VALUES ('+scum+', 1)');
-          var result = await client.query("SELECT sum(value) as total FROM scum_levels WHERE name is '"+scum+"'");
-          await client.end();
-          postMessage("Scum levels: " + scum + " " + result[0]['total']);
+          client.query('INSERT INTO scum_levels (name, value) VALUES ('+scum+', 1)', (err,res) => {
+            if(!err) {
+              client.query("SELECT sum(value) as total FROM scum_levels WHERE name is '"+scum+"'", (err,res) => {
+                postMessage("Scum levels: " + scum + " " + res.rows[0]['total']);
+              });
+            }
+          });
       };
     }
     this.res.end();
