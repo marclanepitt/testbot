@@ -24,9 +24,13 @@ function respond() {
         postMessage("Nice try");
       } else {
         client.connect(function(err) {
+          console.log("connection error" + err);
           client.query('INSERT INTO scum_levels (name, value) VALUES ('+scum+', 1)', function(err,res) {
+            console.log("query 1 error" + err);
+
             if(!err) {
               client.query("SELECT sum(value) as total FROM scum_levels WHERE name is '"+scum+"'", function(err,res) {
+                console.log("query 2 error" + err);
                 postMessage("Scum levels: " + scum + " " + res.rows[0]['total']);
               });
             }
