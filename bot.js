@@ -13,6 +13,8 @@ function respond() {
 
   var request = JSON.parse(this.req.chunks[0]),
       giphyCommand = '/giphy';
+      decideCommand = '/decide';
+
     this.res.writeHead(200);
     if(request.text && request.text.length > giphyCommand.length && request.text.substring(0, giphyCommand.length) === giphyCommand) {
         searchGiphy(request.text.substring(giphyCommand.length + 1));
@@ -58,6 +60,15 @@ function respond() {
         });
       };
     }
+
+    if(request.text && request.text.length > decideCommand.length && request.text.substring(0, decideCommand.length) === decideCommand) {
+      var decideString = request.text.substring(decideCommand.length + 1);
+      var decideList = decideString.split(",");
+
+      postMessage("Rolling the dice...");
+      postMessage("I choose "+ decideList[Math.floor(Math.random()*decideList.length)]);
+    }
+
     this.res.end();
 
 }
