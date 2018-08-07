@@ -27,7 +27,7 @@ function respond() {
     if(request.text && (request.text.match(/\+/g) || []).length == 2 && request.text.slice(request.text.length-2, request.text.length) === "++") {
       updateScumLevels(request, 1);
     }
-    if(request.text && (request.text.match(/-/g) || []).length == 1 && request.text.slice(request.text.length-2, request.text.length) === "--") {
+    if(request.text && (request.text.match(/\-/g) || []).length == 1 && request.text.slice(request.text.length-2, request.text.length) === "--") {
       updateScumLevels(request, -1);
     }
 
