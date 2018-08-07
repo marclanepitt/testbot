@@ -21,13 +21,13 @@ function respond() {
       urbanCommand = '/urban';
 
     this.res.writeHead(200);
-    if(request.text && request.text.length > giphyCommand.length && request.text.substring(0, giphyCommand.length) === giphyCommand && request.name !== "Test Guy" && request.name !== "Scum Guy") {
+    if(request.text && request.text.length > giphyCommand.length && request.text.substring(0, giphyCommand.length) === giphyCommand && request.name !== "Test Guy" && request.name !== "Stav Bot") {
         searchGiphy(request.text.substring(giphyCommand.length + 1));
     }
     if(request.text && (request.text.match(/\+/g) || []).length == 2 && request.text.slice(request.text.length-2, request.text.length) === "++") {
       updateScumLevels(request, 1);
     }
-    if(request.text && (request.text.match(/\-/g) || []).length == 2 && request.text.slice(request.text.length-2, request.text.length) === "--") {
+    if(request.text && (request.text.match(/-/g) || []).length == 1 && request.text.slice(request.text.length-2, request.text.length) === "--") {
       updateScumLevels(request, -1);
     }
 
@@ -67,7 +67,7 @@ function respond() {
 /quote - returns a random quote \r\n
 /urban <term> - returns urban dictionary definition of term \r\n
 <name>++ - Increases name's scum levels \r\n
-<name>-- - Decreases name's scum levels`)
+<name>- - Decreases name's scum levels`)
     }
 
     this.res.end();
