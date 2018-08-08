@@ -69,11 +69,13 @@ function respond() {
 }
 
 function alert(e) {
-  var beer, restaurant;
+  var beer, restaurant, message;
   if(e === "beer") {
       beer = getRandomBeer();
       restaurant = "hi";
+      message = "Happy Friday! Grab a cold one of " + beer + " and hit up " + restaurant + " for dinner!";
   }
+
   options = {
     hostname: 'api.groupme.com',
     path: '/v3/bots/post',
@@ -82,11 +84,11 @@ function alert(e) {
 
   body = {
     "bot_id" : botID,
-    "text" : "Happy Friday! Grab a cold one of " + beer + " and hit up " + restaurant + " for dinner!",
+    "text" : message,
   };
 
   HTTPS.request(options, function(res) {
-    console.log(res)
+    console.log(res);
   }).end(JSON.stringify(body));
 }
 
@@ -233,6 +235,7 @@ function getRandomBeer() {
   };
 
   var callback = function(resp) {
+    console.log(resp)
     body ='';
     var cb = function(data) {
       body +=data;
