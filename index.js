@@ -11,9 +11,9 @@ router = new director.http.Router({
     get: ping
   }
 });
-//
-var j = schedule.scheduleJob('5 16 * * FRI', function(){
-    bot.alert("beer");
+// '5 17 * * FRI'
+var j = schedule.scheduleJob(' */1 * * * *', function(){
+    bot.alert("beer")
 });
 
 server = http.createServer(function (req, res) {
