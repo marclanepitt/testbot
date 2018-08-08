@@ -69,7 +69,6 @@ function respond() {
 }
 
 function alert(e) {
-  console.log(e)
   var botResponse = e;
 
   options = {
@@ -85,7 +84,7 @@ function alert(e) {
 
   HTTPS.request(options, function(res) {
     console.log("It's Friday!")
-  });
+  }).end();
 }
 
 function searchGiphy(giphyToSearch) {
