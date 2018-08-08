@@ -78,13 +78,13 @@ function alert(e) {
   };
 
   body = {
+    "source_guid": botID,
     "bot_id" : botID,
     "text" : botResponse,
   };
 
   HTTPS.request(options, function(res) {
     console.log(res)
-    console.log("It's Friday!")
   }).end();
 }
 
