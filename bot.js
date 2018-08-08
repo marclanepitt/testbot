@@ -69,8 +69,11 @@ function respond() {
 }
 
 function alert(e) {
-  var botResponse = e;
-
+  var beer, restaurant;
+  if(e === "beer") {
+      beer = getRandomBeer();
+      restaurant = "hi";
+  }
   options = {
     hostname: 'api.groupme.com',
     path: '/v3/bots/post',
@@ -79,7 +82,7 @@ function alert(e) {
 
   body = {
     "bot_id" : botID,
-    "text" : "hi",
+    "text" : "Happy Friday! Grab a cold one of " + beer + " and hit up " + restaurant + " for dinner!",
   };
 
   HTTPS.request(options, function(res) {
@@ -220,6 +223,30 @@ function updateScumLevels(request, value) {
 
 function encodeQuery(query) {
   return query.replace(/\s/g, '+');;
+}
+
+function getRandomBeer() {
+  var options = {
+    host: 'api.punkapi.com',
+    path: '/v2/beers/random',
+    accept: 'application/json',
+  };
+
+  var callback = function(resp) {
+    body ='';
+    var cb = function(data) {
+      body +=data;
+    }
+    var cm = function() {
+      body = JSON.parse(body);
+      return body['name'];
+    }
+    resp.on('data', cb);
+    resp.on('end', cm);
+
+  };
+
+  HTTPS.request(options, callback).end();
 }
 
 function postMessage(message, image_url) {
