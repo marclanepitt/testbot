@@ -70,7 +70,7 @@ function respond() {
 
 function alert(e) {
     if(e === "beer") {
-      sendRandomBeerAndRestaurant();
+      sendRandomBeer();
     }
 }
 
@@ -209,7 +209,7 @@ function encodeQuery(query) {
   return query.replace(/\s/g, '+');;
 }
 
-function sendRandomBeerAndRestaurant() {
+function sendRandomBeer() {
   var options = {
     host: 'api.punkapi.com',
     path: '/v2/beers/random',
@@ -224,7 +224,11 @@ function sendRandomBeerAndRestaurant() {
     var cm = function() {
       body = JSON.parse(body);
       console.log(body);
-      postMessage("Beer is");
+      postMessage(`Happy Friday! Grab a ` + body[0].name + `!\r\n
+      --------Beer Summary--------\r\n
+      ABV: ` +body[0].abv+ ` Percent\r\n
+      Description: ` +body[0].description+ `
+      `);
     }
     resp.on('data', cb);
     resp.on('end', cm);
