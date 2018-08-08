@@ -69,27 +69,9 @@ function respond() {
 }
 
 function alert(e) {
-  var beer, restaurant, message;
-  if(e === "beer") {
-      beer = getRandomBeer();
-      restaurant = "hi";
-      message = "Happy Friday! Grab a cold one of " + beer + " and hit up " + restaurant + " for dinner!";
-  }
-
-  options = {
-    hostname: 'api.groupme.com',
-    path: '/v3/bots/post',
-    method: 'POST'
-  };
-
-  body = {
-    "bot_id" : botID,
-    "text" : message,
-  };
-
-  HTTPS.request(options, function(res) {
-    console.log(res);
-  }).end(JSON.stringify(body));
+    if(e === "beer") {
+      sendRandomBeerAndRestaurant();
+    }
 }
 
 function searchGiphy(giphyToSearch) {
@@ -227,7 +209,7 @@ function encodeQuery(query) {
   return query.replace(/\s/g, '+');;
 }
 
-function getRandomBeer() {
+function sendRandomBeerAndRestaurant() {
   var options = {
     host: 'api.punkapi.com',
     path: '/v2/beers/random',
@@ -235,14 +217,13 @@ function getRandomBeer() {
   };
 
   var callback = function(resp) {
-    console.log(resp)
     body ='';
     var cb = function(data) {
       body +=data;
     }
     var cm = function() {
       body = JSON.parse(body);
-      return body['name'];
+      postMessage("Beer is " + body.name);
     }
     resp.on('data', cb);
     resp.on('end', cm);
