@@ -84,7 +84,7 @@ function alert(e) {
 
   HTTPS.request(options, function(res) {
     console.log(res)
-  }).end();
+  }).end(JSON.stringify(body));
 }
 
 function searchGiphy(giphyToSearch) {
