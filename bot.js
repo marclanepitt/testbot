@@ -83,6 +83,7 @@ function alert(e) {
   };
 
   HTTPS.request(options, function(res) {
+    console.log(res)
     console.log("It's Friday!")
   }).end();
 }
