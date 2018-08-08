@@ -12,7 +12,7 @@ router = new director.http.Router({
   }
 });
 // '5 17 * * FRI'
-var j = schedule.scheduleJob('* * * * *', function(){
+var j = schedule.scheduleJob(' */1 * * * *', function(){
     bot.alert("hi")
 });
 
