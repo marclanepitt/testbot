@@ -69,6 +69,7 @@ function respond() {
 }
 
 function alert(e) {
+  console.log(e)
   var botResponse = e;
 
   options = {
