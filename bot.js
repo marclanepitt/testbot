@@ -68,6 +68,13 @@ function respond() {
 
 }
 
+function alert() {
+  var request = JSON.parse(this.req.chunks[0]);
+  this.res.writeHead(200);
+  postMessage("hi")
+  this.res.end();
+}
+
 function searchGiphy(giphyToSearch) {
   var options = {
     host: 'api.giphy.com',

@@ -9,6 +9,7 @@
   "dependencies": {
     "director": "",
     "express": "",
+    "node-schedule": "^1.3.0",
     "pg": "^7.4.3"
   },
   "engines": {

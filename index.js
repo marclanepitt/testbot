@@ -1,14 +1,19 @@
-var http, director, bot, router, server, port;
+var http, director, bot, router, server, port, schedule;
 
 http        = require('http');
 director    = require('director');
 bot         = require('./bot.js');
+schedule    = require('node-schedule');
 
 router = new director.http.Router({
   '/' : {
     post: bot.respond,
     get: ping
   }
+});
+
+var j = schedule.scheduleJob({minute: 1}, function(){
+    bot.alert();
 });
 
 server = http.createServer(function (req, res) {
