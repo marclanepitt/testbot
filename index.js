@@ -12,11 +12,10 @@ router = new director.http.Router({
   }
 });
 
-var j = schedule.scheduleJob({minute: 1}, function(){
-    bot.alert();
-});
-
 server = http.createServer(function (req, res) {
+  var j = schedule.scheduleJob({minute: 1}, function(){
+    bot.alert();
+  });
   req.chunks = [];
   req.on('data', function (chunk) {
     console.log(chunk.toString());
