@@ -78,9 +78,8 @@ function alert(e) {
   };
 
   body = {
-    "source_guid": botID,
     "bot_id" : botID,
-    "text" : botResponse,
+    "text" : "hi",
   };
 
   HTTPS.request(options, function(res) {
