@@ -13,7 +13,9 @@ router = new director.http.Router({
 });
 
 var j = schedule.scheduleJob('*/1 * * * *', function(){
+    res.writeHead(200);
     bot.alert("hi");
+    res.end();
 });
 
 server = http.createServer(function (req, res) {

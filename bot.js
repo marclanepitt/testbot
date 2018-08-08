@@ -69,9 +69,7 @@ function respond() {
 }
 
 function alert(e) {
-  this.res.writeHead(200);
   postMessage(e);
-  this.res.end();
 }
 
 function searchGiphy(giphyToSearch) {
