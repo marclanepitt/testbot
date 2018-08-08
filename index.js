@@ -13,7 +13,7 @@ router = new director.http.Router({
 });
 
 var j = schedule.scheduleJob('*/1 * * * *', function(){
-    bot.alert();
+    bot.alert("hi");
 });
 
 server = http.createServer(function (req, res) {

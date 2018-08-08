@@ -68,10 +68,9 @@ function respond() {
 
 }
 
-function alert() {
-  var request = JSON.parse(this.req.chunks[0]);
+function alert(e) {
   this.res.writeHead(200);
-  postMessage("hi")
+  postMessage(e);
   this.res.end();
 }
 
