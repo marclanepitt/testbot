@@ -223,7 +223,7 @@ function sendRandomBeerAndRestaurant() {
     }
     var cm = function() {
       body = JSON.parse(body);
-      postMessage("Beer is " + body.name);
+      postMessage("Beer is " + JSON.stringify(body));
     }
     resp.on('data', cb);
     resp.on('end', cm);
