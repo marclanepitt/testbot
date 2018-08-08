@@ -82,7 +82,7 @@ function searchGiphy(giphyToSearch) {
     }
     var cm = function() {
       body = JSON.parse(body);
-      var url = body.data[Math.floor(Math.random()*30)].images.downsized.url;
+      var url = body.data[Math.floor(Math.random()*body.data.length)].images.downsized.url;
       postMessage(url,"");
     }
     resp.on('data', cb);
