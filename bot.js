@@ -253,3 +253,4 @@ function postMessage(message, image_url) {
 }
 
 exports.respond = respond;
+exports.alert = alert;

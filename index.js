@@ -12,8 +12,8 @@ router = new director.http.Router({
   }
 });
 
-var j = schedule.scheduleJob('*/5 * * * *', function(){
-  console.log('Today is recognized by Rebecca Black!');
+var j = schedule.scheduleJob('*/1 * * * *', function(){
+    bot.alert();
 });
 
 server = http.createServer(function (req, res) {
