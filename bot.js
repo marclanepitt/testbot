@@ -223,8 +223,11 @@ function sendRandomBeer() {
     }
     var cm = function() {
       body = JSON.parse(body);
-      console.log(body);
-      postMessage(`Happy Friday! Grab a ` + body[0].name + `!\r\n
+      var an = "a";
+      if(['a', 'e', 'i', 'o', 'u'].indexOf(body[0].name[0]) !== -1) {
+        an = "an";
+      }
+      postMessage(`Happy Friday! Grab  `+an + ` ` + body[0].name + `!\r\n
       --------Beer Summary--------\r\n
       ABV: ` +body[0].abv+ ` Percent\r\n
       Description: ` +body[0].description+ `
