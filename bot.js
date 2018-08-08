@@ -71,7 +71,7 @@ function respond() {
 function searchGiphy(giphyToSearch) {
   var options = {
     host: 'api.giphy.com',
-    path: '/v1/gifs/random?tag=' + encodeQuery(giphyToSearch) + '&api_key=' + apiKey,
+    path: '/v1/gifs/search?q=' + encodeQuery(giphyToSearch) + '&api_key=' + apiKey,
     accept: 'image/*'
   };
 
@@ -82,7 +82,7 @@ function searchGiphy(giphyToSearch) {
     }
     var cm = function() {
       body = JSON.parse(body);
-      var url = body.data.images.downsized.url;
+      var url = body.data[0].images.downsized.url;
       postMessage(url,"");
     }
     resp.on('data', cb);
