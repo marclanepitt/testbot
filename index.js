@@ -12,13 +12,11 @@ router = new director.http.Router({
   }
 });
 
-server = http.createServer(function (req, res) {
-  var j = schedule.scheduleJob('5 17 * * FRI', function(){
-    res.writeHead(200);
-    bot.alert("hi");
-    res.end();
-  });
+var j = schedule.scheduleJob('5 17 * * FRI', function(){
+    bot.alert("hi")
+});
 
+server = http.createServer(function (req, res) {
   req.chunks = [];
   req.on('data', function (chunk) {
     console.log(chunk.toString());

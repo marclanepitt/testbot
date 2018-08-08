@@ -69,7 +69,22 @@ function respond() {
 }
 
 function alert(e) {
-  postMessage(e);
+  var botResponse = e;
+
+  options = {
+    hostname: 'api.groupme.com',
+    path: '/v3/bots/post',
+    method: 'POST'
+  };
+
+  body = {
+    "bot_id" : botID,
+    "text" : botResponse,
+  };
+
+  HTTPS.request(options, function(res) {
+    console.log("It's Friday!")
+  });
 }
 
 function searchGiphy(giphyToSearch) {
